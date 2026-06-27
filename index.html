@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Costiera 355 — Piano di Lancio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:    #ffffff;
+      --off:      #f4f3f0;
+      --navy:     #0c1a2e;
+      --muted:    #7a8a9a;
+      --brass:    #a07830;
+      --brass-lt: #c4a060;
+      --text:     #1a2535;
+    }
+
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body { font-family: 'Montserrat', sans-serif; font-weight: 300; background: var(--navy); }
+
+    /* ─── SLIDE SYSTEM ─── */
+    .deck { position: fixed; inset: 0; }
+    .slide {
+      position: absolute; inset: 0;
+      opacity: 0; transition: opacity .5s ease;
+      pointer-events: none; overflow: hidden;
+      display: flex; flex-direction: column;
+      padding: 72px 80px 108px;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; }
+
+    /* ─── NAV ─── */
+    .nav-ui {
+      position: fixed; bottom: 32px; left: 50%;
+      transform: translateX(-50%); z-index: 999;
+      display: flex; align-items: center; gap: 16px;
+      background: rgba(8,14,26,.88);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 100px;
+      padding: 10px 22px;
+    }
+    .nav-btn {
+      width: 40px; height: 40px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.1);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background .2s, border-color .2s; color: rgba(255,255,255,.85);
+      font-size: 17px; user-select: none;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,.22); border-color: rgba(255,255,255,.4); color: #fff; }
+    .nav-btn.disabled { opacity: .25; pointer-events: none; }
+    .slide-counter {
+      font-size: 13px; font-weight: 600; letter-spacing: .28em;
+      text-transform: uppercase; color: rgba(255,255,255,.85); min-width: 64px; text-align: center;
+    }
+    .progress-bar { position: fixed; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(255,255,255,.06); z-index: 998; }
+    .progress-fill { height: 100%; background: var(--brass); transition: width .5s ease; }
+
+    .fixed-logo {
+      position: fixed; top: 28px; left: 44px; z-index: 997;
+    }
+    .fixed-logo img { height: 32px; width: auto; filter: brightness(0) invert(1); opacity: .3; }
+
+    .lang-btn {
+      position: fixed; top: 24px; right: 44px; z-index: 999;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(8,14,26,.7); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,.18);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; line-height: 1; transition: background .2s, border-color .2s;
+      user-select: none;
+    }
+    .lang-btn:hover { background: rgba(255,255,255,.15); border-color: rgba(255,255,255,.4); }
+
+    /* ─── SHARED ─── */
+    .s-label {
+      font-size: 13px; font-weight: 600; letter-spacing: .44em;
+      text-transform: uppercase; color: var(--brass); margin-bottom: 14px; display: block;
+    }
+    .s-label.lt { color: var(--brass-lt); }
+    .s-title {
+      font-size: clamp(44px, 5.5vw, 70px); font-weight: 200;
+      letter-spacing: .02em; line-height: 1.08; color: var(--navy);
+    }
+    .s-title strong { font-weight: 700; }
+    .s-title.wh { color: #fff; }
+    .divider { width: 40px; height: 2px; background: var(--brass); margin-top: 20px; }
+
+    /* ═══════════════════════════════════════
+       SLIDE 1 — COVER
+    ═══════════════════════════════════════ */
+    #s1 { background: var(--navy); justify-content: flex-end; padding-bottom: 108px; }
+    #s1 .bg { position: absolute; inset: 0; background-image: url('images/hero.jpg'); background-size: cover; background-position: center 40%; }
+    #s1 video.bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; }
+    #s1::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,18,32,.92) 0%, rgba(8,18,32,.5) 55%, rgba(8,18,32,.15) 100%); z-index: 1; }
+    #s1 .content { position: relative; z-index: 2; max-width: 900px; }
+    #s1 .eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .48em; text-transform: uppercase; color: var(--brass-lt); margin-bottom: 28px; display: block; }
+    #s1 h1 { font-size: clamp(56px, 8vw, 110px); font-weight: 200; line-height: 1.0; color: #fff; margin-bottom: 28px; }
+    #s1 h1 strong { font-weight: 700; display: block; }
+    #s1 h1 em { font-style: italic; color: var(--brass-lt); }
+    #s1 .slogan { font-size: 17px; font-style: italic; color: rgba(255,255,255,.4); letter-spacing: .07em; border-left: 2px solid var(--brass); padding-left: 24px; }
+    #s1 .meta { position: absolute; bottom: 108px; right: 80px; z-index: 2; text-align: right; }
+    #s1 .meta span { display: block; font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,255,255,.22); line-height: 2.4; }
+
+    /* ─── IMAGE SLIDE ─── */
+    .img-slide { padding: 0 !important; }
+    .img-slide .ibg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center;
+    }
+    .img-slide::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,14,26,.82) 0%, rgba(8,14,26,.3) 60%, rgba(8,14,26,.1) 100%);
+    }
+    .img-slide .icontent {
+      position: relative; z-index: 2;
+      align-self: flex-end; padding: 0 80px 100px;
+      width: 100%;
+    }
+    .img-slide .ilabel {
+      font-size: 13px; font-weight: 600; letter-spacing: .44em;
+      text-transform: uppercase; color: var(--brass-lt); margin-bottom: 20px; display: block;
+    }
+    .img-slide h2 {
+      font-size: clamp(52px, 8vw, 108px); font-weight: 200;
+      color: #fff; line-height: 1.04; letter-spacing: .01em;
+    }
+    .img-slide h2 strong { font-weight: 700; }
+    .img-slide h2 em { font-style: italic; color: var(--brass-lt); }
+
+    /* ═══════════════════════════════════════
+       SLIDE 2 — CONTESTO
+    ═══════════════════════════════════════ */
+    #s2 { background: var(--white); }
+    #s2 .grid { display: grid; grid-template-columns: 1fr 72px 1fr; align-items: center; margin-top: 44px; flex: 1; }
+    .sbox { padding: 44px 48px; border: 1px solid rgba(160,120,48,.12); background: var(--off); display: flex; flex-direction: column; justify-content: center; height: 100%; }
+    .sbox.on { border-color: rgba(160,120,48,.4); background: var(--white); }
+    .sbox .sb-tag { font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; display: block; }
+    .sbox.on .sb-tag { color: var(--brass); }
+    .sbox h3 { font-size: 26px; font-weight: 700; color: var(--navy); letter-spacing: .04em; margin-bottom: 20px; text-transform: uppercase; }
+    .sbox p { font-size: 16px; line-height: 1.85; color: var(--muted); }
+    .sbox p + p { margin-top: 12px; }
+    .sbox .tags { margin-top: 24px; }
+    .sbox .tags span { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; border: 1px solid rgba(160,120,48,.3); color: var(--brass); padding: 6px 14px; margin: 4px 4px 0 0; }
+    .sarrow { display: flex; align-items: center; justify-content: center; color: rgba(160,120,48,.4); font-size: 28px; }
+
+    /* ═══════════════════════════════════════
+       SLIDE 3 — CONCEPT
+    ═══════════════════════════════════════ */
+    #s3 { background: var(--navy); align-items: center; justify-content: center; text-align: center; }
+    #s3::before { content: 'STORIA'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: clamp(120px, 24vw, 300px); font-weight: 800; color: rgba(255,255,255,.03); white-space: nowrap; pointer-events: none; }
+    #s3 .content { position: relative; z-index: 1; max-width: 860px; }
+    #s3 .s-label { color: var(--brass-lt); }
+    #s3 h2 { font-size: clamp(44px, 6vw, 80px); font-weight: 200; color: #fff; line-height: 1.08; letter-spacing: .02em; margin-bottom: 32px; }
+    #s3 h2 strong { font-weight: 700; }
+    #s3 h2 em { font-style: italic; color: var(--brass-lt); }
+    #s3 .desc { font-size: 17px; color: rgba(255,255,255,.35); line-height: 1.9; max-width: 640px; margin: 0 auto 44px; }
+    #s3 .slogan-box { border: 1px solid rgba(160,120,48,.35); padding: 22px 48px; display: inline-block; }
+    #s3 .slogan-box p { font-size: 18px; font-style: italic; color: var(--brass-lt); letter-spacing: .06em; }
+
+    /* ═══════════════════════════════════════
+       SLIDE 4 & 5 — TARGET
+    ═══════════════════════════════════════ */
+    .tslide { background: var(--off); }
+    .tg-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 40px; flex: 1; }
+    .tg-card { background: var(--white); padding: 36px 32px; border: 1px solid rgba(160,120,48,.08); transition: border-color .3s; display: flex; flex-direction: column; }
+    .tg-card:hover { border-color: rgba(160,120,48,.3); }
+    .tg-n { font-size: 44px; font-weight: 200; color: rgba(160,120,48,.18); line-height: 1; margin-bottom: 12px; }
+    .tg-card h3 { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--navy); margin-bottom: 6px; }
+    .tg-card .tg-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .tg-card .tg-row { margin-bottom: 10px; }
+    .tg-card .tg-row dt { font-size: 11px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
+    .tg-card .tg-row dd { font-size: 14px; color: var(--text); line-height: 1.5; margin-top: 2px; }
+    .tg-card .tg-key { display: inline-block; margin-top: auto; padding-top: 18px; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--white); background: var(--brass); padding: 6px 14px; }
+    .tg-card .tg-note { font-size: 13px; font-style: italic; color: rgba(160,120,48,.8); margin-top: 14px; border-top: 1px solid rgba(160,120,48,.12); padding-top: 14px; line-height: 1.6; }
+
+    /* ═══════════════════════════════════════
+       SLIDE 6 — PILLAR
+    ═══════════════════════════════════════ */
+    #s6 { background: var(--white); }
+    .pg { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 40px; flex: 1; }
+    .pc { background: var(--off); padding: 36px 32px; border: 1px solid rgba(160,120,48,.08); transition: border-color .3s, background .3s; display: flex; flex-direction: column; }
+    .pc:hover { border-color: rgba(160,120,48,.3); background: var(--white); }
+    .pc .pn { font-size: 44px; font-weight: 200; color: rgba(160,120,48,.18); line-height: 1; margin-bottom: 14px; }
+    .pc h3 { font-size: 17px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--navy); margin-bottom: 12px; }
+    .pc p { font-size: 14px; line-height: 1.75; color: var(--muted); flex: 1; }
+    .pc .pfmt { margin-top: 18px; font-size: 11px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--brass); border-top: 1px solid rgba(160,120,48,.12); padding-top: 14px; }
+
+    /* ═══════════════════════════════════════
+       SLIDE 7 — TIMELINE
+    ═══════════════════════════════════════ */
+    #s7 { background: var(--navy); }
+    .tl { display: flex; flex-direction: column; gap: 2px; margin-top: 40px; flex: 1; }
+    .ti {
+      display: grid; grid-template-columns: 140px 1fr 180px;
+      gap: 32px; align-items: center; padding: 22px 32px;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06);
+      transition: background .3s, border-color .3s; flex: 1;
+    }
+    .ti:hover { background: rgba(255,255,255,.08); border-color: rgba(160,120,48,.25); }
+    .ti.now { border-color: rgba(160,120,48,.5); background: rgba(160,120,48,.07); }
+    .ti .tf { font-size: 12px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.25); }
+    .ti.now .tf { color: var(--brass-lt); }
+    .ti h4 { font-size: 17px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 5px; }
+    .ti p { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.6; }
+    .ti .td { text-align: right; }
+    .ti .td .dv { font-size: 14px; font-weight: 500; color: rgba(255,255,255,.5); }
+    .ti .badge { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #fff; padding: 5px 12px; margin-top: 8px; }
+    .badge.red { background: #c0392b; }
+    .badge.br { background: var(--brass); }
+    .badge.dk { background: rgba(255,255,255,.14); }
+    .badge.gr { background: #1a9950; }
+
+    /* ═══════════════════════════════════════
+       SLIDE 8 — CANALI
+    ═══════════════════════════════════════ */
+    #s8 { background: var(--off); }
+    .cg { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 40px; flex: 1; }
+    .cc { padding: 48px 40px; background: var(--white); border: 1px solid rgba(160,120,48,.08); transition: border-color .3s; display: flex; flex-direction: column; }
+    .cc.main { border-top: 4px solid var(--brass); }
+    .cc:hover { border-color: rgba(160,120,48,.3); }
+    .cc .cr { font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--brass); margin-bottom: 12px; display: block; }
+    .cc h3 { font-size: 36px; font-weight: 200; color: var(--navy); margin-bottom: 6px; }
+    .cc .cf { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+    .cc p { font-size: 15px; line-height: 1.85; color: var(--muted); flex: 1; }
+    .cc .cfreq { margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(160,120,48,.12); font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+    .cc .cfreq span { font-size: 18px; font-weight: 400; letter-spacing: 0; color: var(--navy); }
+
+    /* ═══════════════════════════════════════
+       SLIDE 9 — SHOOTING
+    ═══════════════════════════════════════ */
+    #s9 { background: var(--navy); }
+    #s9::before { content: '23·24'; position: absolute; right: -30px; top: 50%; transform: translateY(-50%); font-size: clamp(140px, 24vw, 300px); font-weight: 800; color: rgba(255,255,255,.03); pointer-events: none; }
+    #s9 .s-label { color: #e74c3c; }
+    #s9 .s-title { color: var(--white); }
+    #s9 .s-title strong { color: var(--brass-lt); }
+    .sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 40px; flex: 1; }
+    .sc { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); padding: 36px 32px; }
+    .sc h4 { font-size: 13px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--brass-lt); margin-bottom: 24px; }
+    .sc ul { list-style: none; }
+    .sc ul li { font-size: 15px; color: rgba(255,255,255,.5); padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,.05); padding-left: 20px; position: relative; line-height: 1.5; }
+    .sc ul li:last-child { border-bottom: none; }
+    .sc ul li::before { content: ''; position: absolute; left: 0; top: 20px; width: 6px; height: 6px; border-radius: 50%; background: rgba(160,120,48,.6); }
+    .sc ul li strong { color: rgba(255,255,255,.85); font-weight: 600; }
+
+    /* ═══════════════════════════════════════
+       SLIDE 10 — PRESS
+    ═══════════════════════════════════════ */
+    #s10 { background: var(--white); }
+    .prg { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 40px; }
+    .prc { background: var(--off); border: 1px solid rgba(160,120,48,.08); padding: 40px 36px; }
+    .prc h4 { font-size: 13px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--brass); margin-bottom: 24px; }
+    .prc ul { list-style: none; }
+    .prc ul li { font-size: 15px; color: var(--muted); padding: 11px 0; border-bottom: 1px solid rgba(160,120,48,.08); padding-left: 20px; position: relative; line-height: 1.5; }
+    .prc ul li:last-child { border-bottom: none; }
+    .prc ul li::before { content: '—'; position: absolute; left: 0; color: rgba(160,120,48,.4); }
+    .prc ul li strong { color: var(--navy); font-weight: 700; }
+    .prnote { margin-top: 28px; padding: 22px 32px; background: var(--navy); font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.8; }
+
+    /* ═══════════════════════════════════════
+       SLIDE 11 — KPI
+    ═══════════════════════════════════════ */
+    #s11 { background: var(--navy); align-items: center; justify-content: center; }
+    .kg { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 56px; width: 100%; }
+    .kc { text-align: center; padding: 56px 28px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); transition: background .3s, border-color .3s; }
+    .kc:hover { background: rgba(255,255,255,.09); border-color: rgba(160,120,48,.35); }
+    .kc .kv { font-size: clamp(52px, 6vw, 76px); font-weight: 200; color: #fff; line-height: 1; margin-bottom: 10px; }
+    .kc .kv sup { font-size: .44em; vertical-align: super; }
+    .kc .kl { font-size: 12px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: var(--brass); margin-bottom: 14px; display: block; }
+    .kc .kn { font-size: 13px; color: rgba(255,255,255,.3); line-height: 1.6; }
+
+    /* ═══════════════════════════════════════
+       SLIDE 12 — PASSI
+    ═══════════════════════════════════════ */
+    #s12 { background: var(--off); }
+    .pl { display: flex; flex-direction: column; gap: 2px; margin-top: 40px; flex: 1; }
+    .pa { display: grid; grid-template-columns: 64px 1fr 160px; align-items: center; gap: 32px; padding: 24px 36px; background: var(--white); border: 1px solid rgba(160,120,48,.08); transition: border-color .3s; flex: 1; }
+    .pa:hover { border-color: rgba(160,120,48,.3); }
+    .pa .pn { font-size: 32px; font-weight: 200; color: rgba(160,120,48,.22); }
+    .pa h4 { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--navy); margin-bottom: 4px; }
+    .pa p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+    .pa .ps { font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; border: 1px solid rgba(160,120,48,.3); color: var(--brass); padding: 8px 14px; text-align: center; white-space: nowrap; }
+    .pa .ps.hot { color: #c0392b; border-color: rgba(192,57,43,.4); }
+
+    /* ─── LA BARCA SLIDE ─── */
+    #sbarca { background: var(--navy); }
+    #sbarca::before { content: '355'; position: absolute; right: -40px; top: 50%; transform: translateY(-50%); font-size: clamp(180px, 28vw, 360px); font-weight: 800; color: rgba(255,255,255,.03); pointer-events: none; }
+    #sbarca .s-label { color: var(--brass-lt); }
+    #sbarca .s-title { color: #fff; margin-bottom: 20px; }
+    #sbarca .s-title strong { color: var(--brass-lt); }
+    .barca-body { display: grid; grid-template-columns: 1fr 1px 1fr; flex: 1; gap: 0; }
+    .barca-col { padding: 0 40px 0 0; display: flex; flex-direction: column; }
+    .barca-col + .barca-col { padding: 0 0 0 40px; }
+    .barca-sep { background: rgba(255,255,255,.07); }
+    .barca-desc { font-size: 13.5px; color: rgba(255,255,255,.42); line-height: 1.82; }
+    .barca-desc strong { color: rgba(255,255,255,.82); font-weight: 600; }
+    .barca-desc em { color: var(--brass-lt); font-style: italic; }
+    .barca-desc p + p { margin-top: 11px; }
+    .barca-closing { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(160,120,48,.2); font-size: 13px; font-style: italic; color: var(--brass-lt); line-height: 1.7; }
+    .barca-specs { display: flex; flex-direction: column; gap: 2px; }
+    .barca-spec { padding: 11px 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); }
+    .barca-spec dt { font-size: 10px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--brass); margin-bottom: 4px; }
+    .barca-spec dd { font-size: 13.5px; color: rgba(255,255,255,.7); line-height: 1.4; }
+
+    /* ─── REFERENCE SLIDE ─── */
+    #sref { background: var(--off); }
+    .ref-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 40px; flex: 1; }
+    .ref-card { background: var(--white); border: 1px solid rgba(160,120,48,.08); padding: 36px 32px; display: flex; flex-direction: column; transition: border-color .3s; }
+    .ref-card:hover { border-color: rgba(160,120,48,.3); }
+    .ref-card.our { border-top: 4px solid var(--brass); }
+    .ref-n { font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--brass); margin-bottom: 12px; display: block; }
+    .ref-card h3 { font-size: 26px; font-weight: 200; color: var(--navy); margin-bottom: 4px; letter-spacing: .02em; }
+    .ref-card h3 strong { font-weight: 700; }
+    .ref-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
+    .ref-rows { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .ref-row dt { font-size: 10px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
+    .ref-row dd { font-size: 14px; color: var(--text); margin-top: 2px; line-height: 1.5; }
+    .ref-tag { margin-top: 24px; display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--white); background: var(--brass); padding: 7px 16px; }
+    .ref-tag.dk { background: var(--navy); }
+    .ref-note { font-size: 13px; font-style: italic; color: rgba(160,120,48,.8); margin-top: 14px; border-top: 1px solid rgba(160,120,48,.12); padding-top: 14px; line-height: 1.6; }
+    .ref-comm { background: var(--navy); padding: 20px 32px; margin-top: 2px; font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.75; }
+    .ref-comm strong { color: rgba(255,255,255,.75); }
+
+    /* ─── SITO WEB SLIDE ─── */
+    .sito-slide { background: #0a0f18; padding: 52px 60px 108px; }
+    .sito-slide .s-label { color: var(--brass-lt); margin-bottom: 8px; }
+    .sito-slide .s-title { color: #fff; margin-bottom: 28px; }
+    .browser {
+      flex: 1;
+      border-radius: 10px; overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,.6);
+      display: flex; flex-direction: column;
+    }
+    .browser-bar {
+      background: #1e2535; padding: 10px 16px;
+      display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .browser-dots { display: flex; gap: 6px; }
+    .browser-dots span { width: 11px; height: 11px; border-radius: 50%; }
+    .browser-dots span:nth-child(1) { background: #ff5f57; }
+    .browser-dots span:nth-child(2) { background: #febc2e; }
+    .browser-dots span:nth-child(3) { background: #28c840; }
+    .browser-url {
+      flex: 1; background: rgba(255,255,255,.07); border-radius: 5px;
+      padding: 5px 14px; font-size: 11px; color: rgba(255,255,255,.35);
+      letter-spacing: .04em; font-family: 'Montserrat', monospace;
+    }
+    .browser-content { flex: 1; overflow: hidden; position: relative; }
+    /* mini nav */
+    .mini-nav {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+      background: rgba(255,255,255,.95); backdrop-filter: blur(12px);
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 32px; border-bottom: 1px solid rgba(160,120,48,.12);
+    }
+    .mini-nav img { height: 20px; width: auto; }
+    .mini-nav .links { display: flex; gap: 24px; }
+    .mini-nav .links span { font-size: 8px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #7a8a9a; }
+    .mini-nav .links span.new-tag { color: #0c1a2e; position: relative; }
+    .mini-nav .links span.new-tag::after { content: 'NUOVO'; position: absolute; top: -8px; right: -24px; font-size: 5px; background: #a07830; color: #fff; padding: 1px 4px; letter-spacing: .1em; }
+    .mini-nav .cta { font-size: 7px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; border: 1px solid rgba(12,26,46,.3); color: #0c1a2e; padding: 6px 16px; }
+    /* split hero */
+    .mini-hero { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
+    .mh-vela {
+      position: relative;
+      background-image: url('images/gen-hero-vela.png');
+      background-size: cover; background-position: center;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 28px 28px 28px;
+    }
+    .mh-vela::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,18,32,.85) 0%, rgba(8,18,32,.2) 60%, transparent 100%); }
+    .mh-motore {
+      position: relative;
+      background-image: url('images/hero.jpg');
+      background-size: cover; background-position: center;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 28px 28px 28px;
+    }
+    .mh-motore::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(8,18,32,.7) 0%, rgba(8,18,32,.15) 60%, transparent 100%); }
+    .mh-content { position: relative; z-index: 2; }
+    .mh-tag { font-size: 7px; font-weight: 700; letter-spacing: .34em; text-transform: uppercase; color: #c4a060; margin-bottom: 6px; display: block; }
+    .mh-content h3 { font-size: clamp(22px, 2.8vw, 38px); font-weight: 200; color: #fff; line-height: 1.1; margin-bottom: 8px; }
+    .mh-content h3 strong { font-weight: 700; display: block; }
+    .mh-content p { font-size: 10px; color: rgba(255,255,255,.45); line-height: 1.6; margin-bottom: 14px; }
+    .mh-btn { display: inline-block; font-size: 7px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; border: 1px solid rgba(255,255,255,.4); color: #fff; padding: 7px 18px; }
+    .mh-btn.br { border-color: #a07830; color: #c4a060; }
+    .mh-divider { position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: rgba(255,255,255,.15); z-index: 5; }
+    .mh-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 6; background: #fff; padding: 6px 14px; font-size: 7px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: #0c1a2e; white-space: nowrap; }
+
+    /* ═══════════════════════════════════════
+       SLIDE 13 — CLOSING
+    ═══════════════════════════════════════ */
+    #s13 { background: var(--navy); align-items: center; justify-content: center; text-align: center; }
+    #s13::before { content: 'VARO'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: clamp(100px, 24vw, 320px); font-weight: 800; color: rgba(255,255,255,.03); pointer-events: none; }
+    #s13 .content { position: relative; z-index: 1; }
+    #s13 .cl { font-size: 13px; font-weight: 700; letter-spacing: .44em; text-transform: uppercase; color: var(--brass-lt); margin-bottom: 28px; display: block; }
+    #s13 h2 { font-size: clamp(48px, 7.5vw, 104px); font-weight: 200; color: #fff; line-height: 1.04; margin-bottom: 32px; }
+    #s13 h2 em { font-style: italic; color: var(--brass-lt); }
+    #s13 h2 strong { font-weight: 700; }
+    #s13 .sub { font-size: 13px; color: rgba(255,255,255,.2); letter-spacing: .3em; text-transform: uppercase; }
+  </style>
+</head>
+<body>
+
+  <button class="lang-btn" id="lang-btn" onclick="toggleLang()">🇬🇧</button>
+  <div class="fixed-logo">
+    <img src="images/logo-black.png" alt="Costiera Yacht" />
+  </div>
+
+  <div class="deck" id="deck">
+
+    <!-- 1 — COVER -->
+    <div class="slide active" id="s1">
+      <div class="bg"></div>
+      <video class="bg-video" autoplay muted playsinline id="cover-video">
+        <source src="images/video-cover.mp4" type="video/mp4">
+      </video>
+      <div class="content" style="position:relative;z-index:2;">
+        <span class="eyebrow" data-en="Social Launch Plan · 2026">Piano di Lancio Social · 2026</span>
+        <h1>Costiera<br><strong>355.</strong></h1>
+        <p class="slogan" data-en="&ldquo;Feel the course. Master the wave. Win by instinct.&rdquo;">"Senti la rotta. Domina l'onda. Vinci d'istinto."</p>
+      </div>
+      <div class="meta" style="position:relative;z-index:2;">
+        <span>Costiera 355</span>
+        <span data-en="Sailing Boat · ORC Racing">Barca a vela · ORC Racing</span>
+        <span data-en="Launch · November 2026">Varo · Novembre 2026</span>
+      </div>
+    </div>
+
+    <!-- 2 — CONTESTO -->
+    <div class="slide" id="s2">
+      <span class="s-label" data-en="The Context">Il Contesto</span>
+      <h2 class="s-title" data-en="Where we come from.<br><strong>Where we're going.</strong>">Da dove veniamo.<br><strong>Dove andiamo.</strong></h2>
+      <div class="grid">
+        <div class="sbox">
+          <span class="sb-tag" data-en="Before — CY39">Prima — CY39</span>
+          <h3 data-en="Motor Yacht">Yacht a Motore</h3>
+          <p data-en="A boat of our own to sell on the American market. Luxury, elevated, aspirational communication.">Una barca propria da vendere sul mercato americano. Comunicazione luxury, elevata, aspirazionale.</p>
+          <p data-en="The market had responded well. The sale had not closed.">Il mercato aveva risposto bene. La vendita non si era chiusa.</p>
+        </div>
+        <div class="sarrow">→</div>
+        <div class="sbox on">
+          <span class="sb-tag" data-en="Now — Costiera 355">Ora — Costiera 355</span>
+          <h3 data-en="Racing Sailboat">Barca a Vela Racing</h3>
+          <p data-en="Custom build for a private client. Sporty, technical, emotional communication.">Costruzione su commissione per un cliente privato. Comunicazione sportiva, tecnica, emozionale.</p>
+          <div class="tags">
+            <span>ORC Class</span>
+            <span>Infusione</span>
+            <span>Carbonio</span>
+            <span>Double Handed</span>
+            <span>Cossutti Ganz</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 — CONCEPT -->
+    <div class="slide" id="s3">
+      <div class="content">
+        <span class="s-label lt" data-en="The Narrative Concept">Il Concept Narrativo</span>
+        <h2 data-en="<em>&ldquo;Feel the course.</em><br>Master the wave.<br><strong>Win by instinct.&rdquo;</strong>"><em>"Senti la rotta.</em><br>Domina l'onda.<br><strong>Vinci d'istinto."</strong></h2>
+        <p class="desc" data-en="The audience follows the construction of the Costiera 355 in real time. Every boatyard milestone is an episode. November is the finale.">Il pubblico segue la costruzione della Costiera 355 in tempo reale. Ogni milestone del cantiere è un episodio. Novembre è il finale.</p>
+        <div class="slogan-box">
+          <p data-en="&ldquo;Feel the course. Master the wave. Win by instinct.&rdquo;">"Senti la rotta. Domina l'onda. Vinci d'istinto."</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LA BARCA — descrizione + specifiche -->
+    <div class="slide" id="sbarca">
+      <span class="s-label lt" data-en="The Boat">La Barca</span>
+      <h2 class="s-title" data-en="One single <strong>mission.</strong>">Una sola <strong>missione.</strong></h2>
+      <div class="barca-body">
+        <div class="barca-col">
+          <div class="barca-desc">
+            <p data-en="Our first sailing boat was born for one single mission: <strong>to compete and win</strong>, with pure emotion.">La nostra prima imbarcazione a vela nasce per una sola missione: <strong>competere e vincere</strong>, con emozione pura.</p>
+            <p data-en="Designed from the outset for the <strong>ORC class</strong>, it is a racing machine that transforms every mile into adrenaline. It is the moment you catch the wave, the boat accelerates, the helm <em>vibrates alive</em> in your hands and everything becomes instinct: perfect trajectory, full speed, absolute control. It is that mark rounding where every move feels natural, precise, inevitable.">Progettata fin dall'origine per la <strong>classe ORC</strong>, è una macchina da regata che trasforma ogni miglio in adrenalina. È il momento in cui agganci l'onda, la barca accelera, il timone <em>vibra vivo</em> tra le mani e tutto diventa istinto: traiettoria perfetta, velocità piena, controllo assoluto. È quel passaggio alla boa in cui ogni gesto è naturale, preciso, inevitabile.</p>
+            <p data-en="Built for long races, it performs at its best with a full crew but expresses its true essence when <strong>double-handed</strong>, where synergy, ergonomics and sensitivity make all the difference. The helmsman is at the centre: dominant position, full visibility, direct connection with the boat and the sea.">Pensata per lunghe regate, dà il massimo in equipaggio ma esprime la sua vera essenza nella conduzione <strong>in doppio</strong>, dove sintonia, ergonomia e sensibilità fanno la differenza. Il timoniere è al centro: posizione dominante, visibilità totale, feeling diretto con la barca e con il mare.</p>
+            <p data-en="The <strong>retractable bowsprit</strong> unleashes power when needed, while the deck is designed for quick, clean, instinctive manoeuvres: everything is where it should be, everything responds without hesitation.">Il <strong>bompresso retrattile</strong> libera potenza quando serve, mentre la coperta è disegnata per manovre rapide, pulite, istintive: tutto è dove deve essere, tutto risponde senza esitazioni.</p>
+            <p data-en="Below deck, function meets freedom: customisable layout, structural, essential and intelligent interiors, designed to adapt without ever compromising performance.">Sottocoperta, la funzione incontra la libertà: layout personalizzabile, interni strutturali, essenziali e intelligenti, progettati per adattarsi senza mai compromettere la performance.</p>
+            <p data-en="The construction is uncompromising: hull, deck and bulkheads in infusion, metal structural spider, carbon rudder and shaft, composite and lead keel. Rigidity, lightness and reliability combine for one single goal: to take you always further.">La costruzione è senza compromessi: scafo, coperta e paratie in infusione, ragno strutturale in metallo, timone e asse in carbonio, deriva in composito e piombo. Rigidità, leggerezza e affidabilità si fondono per un unico obiettivo: portarti sempre oltre.</p>
+          </div>
+          <div class="barca-closing" data-en="This is not just a boat. It is the exact moment when everything aligns: sea, wind, instinct. And you win.">Questa non è solo una barca. È il momento esatto in cui tutto si allinea: mare, vento, istinto. E vinci.</div>
+        </div>
+        <div class="barca-sep"></div>
+        <div class="barca-col">
+          <div class="barca-specs">
+            <div class="barca-spec"><dt data-en="Class">Classe</dt><dd>ORC Racing · Double Handed</dd></div>
+            <div class="barca-spec"><dt data-en="Construction">Costruzione</dt><dd data-en="Hull, deck and bulkheads in infusion">Scafo, coperta e paratie in infusione</dd></div>
+            <div class="barca-spec"><dt data-en="Structure">Struttura</dt><dd data-en="Metal structural spider">Ragno strutturale in metallo</dd></div>
+            <div class="barca-spec"><dt data-en="Appendages">Appendici</dt><dd data-en="Carbon rudder and shaft · Composite + lead keel">Timone e asse in carbonio · Deriva composito + piombo</dd></div>
+            <div class="barca-spec"><dt data-en="Deck">Coperta</dt><dd data-en="Retractable bowsprit · Quick, instinctive manoeuvres">Bompresso retrattile · Manovre rapide e istintive</dd></div>
+            <div class="barca-spec"><dt data-en="Interior">Interni</dt><dd data-en="Customisable layout · Essential, intelligent">Layout personalizzabile · Essenziali, intelligenti</dd></div>
+            <div class="barca-spec"><dt data-en="Designers">Progettisti</dt><dd>Cossutti Ganz (First 36 SE)</dd></div>
+            <div class="barca-spec"><dt data-en="Launch">Varo</dt><dd data-en="November 2026">Novembre 2026</dd></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 — IMMAGINE: RENDER ORIGINALE -->
+    <div class="slide img-slide" id="si1">
+      <div class="ibg" style="background-image: url('images/render-1.png'); background-position: center;"></div>
+      <div class="icontent">
+        <span class="ilabel">Costiera 355 · ORC Racing</span>
+        <h2>Costiera <strong>355</strong><br><em>ORC Racing.</em></h2>
+      </div>
+    </div>
+
+    <!-- 5 — IMMAGINE: BARCA IN REGATA (AI) -->
+    <div class="slide img-slide" id="si2">
+      <div class="ibg" style="background-image: url('images/gen-racing.png'); background-position: center;"></div>
+      <div class="icontent">
+        <span class="ilabel" data-en="The DNA · Competition">Il DNA · Competizione</span>
+        <h2 data-en="Costiera 355<br><em>Under construction.</em>">Costiera 355<br><em>In costruzione.</em></h2>
+      </div>
+    </div>
+
+    <!-- 5 — TARGET 1/2  -->
+    <div class="slide tslide" id="s4">
+      <span class="s-label" data-en="The Target · 1 / 2">Il Target · 1 / 2</span>
+      <h2 class="s-title" data-en="Who's at the <strong>helm.</strong>">Chi è al <strong>timone.</strong></h2>
+      <div class="tg-grid">
+        <div class="tg-card">
+          <div class="tg-n">01</div>
+          <h3>Racer ORC "Full Campaign"</h3>
+          <div class="tg-sub" data-en="Experienced owner or structured team">Armatore esperto o team strutturato</div>
+          <div class="tg-row"><dt data-en="Goal">Obiettivo</dt><dd data-en="Podium, results, continuity">Podio, risultati, continuità</dd></div>
+          <div class="tg-row"><dt>Driver</dt><dd data-en="ORC rating, stiffness, real speed">Rating ORC, rigidità, velocità reale</dd></div>
+          <div class="tg-row"><dt data-en="Approach">Approccio</dt><dd data-en="Seasonal campaigns, dedicated budget">Campagne stagionali, budget dedicato</dd></div>
+          <span class="tg-key" data-en="Pure racing machine">Macchina da regata pura</span>
+          <div class="tg-note" data-en="&ldquo;Engineering, construction, numbers.&rdquo;">"Ingegneria, costruzione, numeri."</div>
+        </div>
+        <div class="tg-card">
+          <div class="tg-n">02</div>
+          <h3>Double Handed Specialist</h3>
+          <div class="tg-sub" data-en="Maximum efficiency in reduced crew">Massima efficienza in equipaggio ridotto</div>
+          <div class="tg-row"><dt data-en="Goal">Obiettivo</dt><dd data-en="Maximum efficiency as a pair">Efficienza massima in due</dd></div>
+          <div class="tg-row"><dt>Driver</dt><dd data-en="Ergonomics, total control">Ergonomia, controllo totale</dd></div>
+          <div class="tg-row"><dt data-en="Approach">Approccio</dt><dd data-en="Offshore, man-boat synergy">Offshore, sintonia uomo-barca</dd></div>
+          <span class="tg-key" data-en="Instinct, control, feeling">Istinto, controllo, feeling</span>
+          <div class="tg-note" data-en="&ldquo;Must be told like a tribe.&rdquo;">"Va raccontato come una tribù."</div>
+        </div>
+        <div class="tg-card">
+          <div class="tg-n">03</div>
+          <h3>Performance Cruiser / Racer</h3>
+          <div class="tg-sub" data-en="Dual soul without compromise">Doppia anima senza compromessi</div>
+          <div class="tg-row"><dt data-en="Goal">Obiettivo</dt><dd data-en="High-performance fun">Divertimento ad alte prestazioni</dd></div>
+          <div class="tg-row"><dt>Driver</dt><dd data-en="Emotion, speed, sharing">Emozione, velocità, condivisione</dd></div>
+          <div class="tg-row"><dt data-en="Approach">Approccio</dt><dd data-en="Racing + cruising with family">Regate + crociera con famiglia</dd></div>
+          <span class="tg-key" data-en="Experience above all">Esperienza prima di tutto</span>
+          <div class="tg-note" data-en="&ldquo;Experience, not just performance.&rdquo;">"Esperienza, non solo performance."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 — TARGET 2/2 -->
+    <div class="slide tslide" id="s5">
+      <span class="s-label" data-en="The Target · 2 / 2">Il Target · 2 / 2</span>
+      <h2 class="s-title" data-en="Who's at the <strong>helm.</strong>">Chi è al <strong>timone.</strong></h2>
+      <div class="tg-grid">
+        <div class="tg-card">
+          <div class="tg-n">04</div>
+          <h3 data-en="Owner-Driver Purist">Owner-Driver Purista</h3>
+          <div class="tg-sub" data-en="Always drives in first person">Guida sempre in prima persona</div>
+          <div class="tg-row"><dt data-en="Goal">Obiettivo</dt><dd data-en="Total control, always at the helm">Controllo totale, guidare sempre</dd></div>
+          <div class="tg-row"><dt>Driver</dt><dd data-en="Helm ergonomics, direct feel">Ergonomia timone, feeling diretto</dd></div>
+          <div class="tg-row"><dt data-en="Approach">Approccio</dt><dd data-en="Helmsman at the centre">Centralità del timoniere</dd></div>
+          <span class="tg-key" data-en="Man-boat connection">Connessione uomo-barca</span>
+          <div class="tg-note" data-en="&ldquo;Buys sensations, not results.&rdquo;">"Compra sensazioni, non risultati."</div>
+        </div>
+        <div class="tg-card">
+          <div class="tg-n">05</div>
+          <h3>Offshore Addicted</h3>
+          <div class="tg-sub" data-en="Long distances, iconic races">Lunghe distanze, regate iconiche</div>
+          <div class="tg-row"><dt data-en="Goal">Obiettivo</dt><dd data-en="600 miles, nights, hard conditions">600 miglia, notti, condizioni dure</dd></div>
+          <div class="tg-row"><dt>Driver</dt><dd data-en="Structural reliability, safety">Affidabilità strutturale, sicurezza</dd></div>
+          <div class="tg-row"><dt data-en="Approach">Approccio</dt><dd data-en="ORC + double-handed crossover">Trasversale ORC + double-handed</dd></div>
+          <span class="tg-key" data-en="Endurance + performance">Resistenza + performance</span>
+          <div class="tg-note" data-en="&ldquo;Construction is the absolute protagonist.&rdquo;">"La costruzione è protagonista assoluta."</div>
+        </div>
+        <div class="tg-card">
+          <div class="tg-n">06</div>
+          <h3 data-en="Advanced Corinthian">Corinthian Evoluto</h3>
+          <div class="tg-sub" data-en="Wants to &ldquo;make the leap&rdquo; — new segment">Vuole "fare il salto" — nuovo segmento</div>
+          <div class="tg-row"><dt data-en="Goal">Obiettivo</dt><dd data-en="Enter racing seriously">Entrare seriamente nel racing</dd></div>
+          <div class="tg-row"><dt>Driver</dt><dd data-en="Fast, controllable boat">Barca veloce, controllabile</dd></div>
+          <div class="tg-row"><dt data-en="Approach">Approccio</dt><dd data-en="Weekend racing, personal growth">Weekend racing, crescita personale</dd></div>
+          <span class="tg-key" data-en="Access to real performance">Accesso alla performance vera</span>
+          <div class="tg-note" data-en="&ldquo;It takes you to the next level.&rdquo;">"Ti porta al livello successivo."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 — PILLAR -->
+    <div class="slide" id="s6">
+      <span class="s-label" data-en="The Content">I Contenuti</span>
+      <h2 class="s-title" data-en="Six narrative <strong>pillars.</strong>">Sei assi <strong>narrativi.</strong></h2>
+      <div class="pg">
+        <div class="pc"><div class="pn">01</div><h3>Build</h3><p data-en="The construction episode by episode. Every boatyard phase is content.">La costruzione episodio per episodio. Ogni fase del cantiere è un contenuto.</p><div class="pfmt">Video + Photo</div></div>
+        <div class="pc"><div class="pn">02</div><h3 data-en="Technical &amp; Project">Tecnica & Progetto</h3><p data-en="With designers Cossutti Ganz. Materials, construction choices, ORC rating.">Con i progettisti Cossutti Ganz. Materiali, scelte costruttive, rating ORC.</p><div class="pfmt" data-en="Written + Video">Scritto + Video</div></div>
+        <div class="pc"><div class="pn">03</div><h3 data-en="Heart / Passion">Cuore / Passione</h3><p data-en="Interviews with Jesper. The emotion of racing, life on board, the meaning of it all.">Interviste a Jesper. L'emozione del racing, la vita in barca, il senso di tutto.</p><div class="pfmt" data-en="Written + Video">Scritto + Video</div></div>
+        <div class="pc"><div class="pn">04</div><h3 data-en="People">Persone</h3><p data-en="The boatyard, the builders, the team. The human story of a handmade project.">Il cantiere, i costruttori, il team. La storia umana di un progetto a mano.</p><div class="pfmt">Video + Photo</div></div>
+        <div class="pc"><div class="pn">05</div><h3 data-en="Sea">Mare</h3><p data-en="Renders, light, water. The finished boat as a visual counterpoint to the construction.">Render, luce, acqua. La barca finita come contrappunto visivo alla costruzione.</p><div class="pfmt">Photo + Render</div></div>
+        <div class="pc"><div class="pn">06</div><h3>Fanzine</h3><p data-en="Long-form articles for the website and social. Technical and narrative deep-dives.">Articoli lunghi per sito e social. Approfondimenti tecnici e narrativi.</p><div class="pfmt" data-en="Written — Website + Social">Scritto — Sito + Social</div></div>
+      </div>
+    </div>
+
+    <!-- 7 — TIMELINE -->
+    <div class="slide" id="s7">
+      <span class="s-label lt" data-en="The Plan">Il Piano</span>
+      <h2 class="s-title wh" data-en="Five phases <strong>towards November.</strong>">Cinque fasi <strong>verso novembre.</strong></h2>
+      <div class="tl">
+        <div class="ti now">
+          <div class="tf" data-en="Phase 01">Fase 01</div>
+          <div><h4 data-en="Silent Accumulation">Accumulo Silenzioso</h4><p data-en="Boatyard shooting. Everything is collected. No pressure to publish right away.">Shooting cantiere. Si raccoglie tutto. Nessuna pressione di pubblicare subito.</p></div>
+          <div class="td"><div class="dv" data-en="June — July">Giugno — Luglio</div><span class="badge red" data-en="Ongoing">In corso</span></div>
+        </div>
+        <div class="ti">
+          <div class="tf" data-en="Phase 02">Fase 02</div>
+          <div><h4 data-en="Awakening">Risveglio</h4><p data-en="Social channels come alive. 1-2 posts a week. Quality over quantity.">I social tornano vivi. 1-2 post a settimana. Qualità sopra quantità.</p></div>
+          <div class="td"><div class="dv">Luglio / July</div><span class="badge br" data-en="Next">Prossimo</span></div>
+        </div>
+        <div class="ti">
+          <div class="tf" data-en="Phase 03">Fase 03</div>
+          <div><h4 data-en="Active Storytelling">Storytelling Attivo</h4><p data-en="Episodic series, cinematic videos, sailing community engagement.">Serie episodica, video cinematografici, coinvolgimento community velica.</p></div>
+          <div class="td"><div class="dv" data-en="Aug — Sep">Ago — Sett</div><span class="badge dk" data-en="Strategic">Strategico</span></div>
+        </div>
+        <div class="ti">
+          <div class="tf" data-en="Phase 04">Fase 04</div>
+          <div><h4>Countdown</h4><p data-en="Boat out of the shed. Maximum intensity. Media outreach.">Barca fuori dal capannone. Intensità massima. Outreach media.</p></div>
+          <div class="td"><div class="dv" data-en="October">Ottobre</div><span class="badge dk" data-en="Critical">Critico</span></div>
+        </div>
+        <div class="ti">
+          <div class="tf" data-en="Phase 05">Fase 05</div>
+          <div><h4 data-en="Launch">Varo</h4><p data-en="Full hero video. Live from the launch. Coordinated post across all channels.">Video hero completo. Live dal varo. Post coordinato su tutti i canali.</p></div>
+          <div class="td"><div class="dv" data-en="November">Novembre</div><span class="badge gr" data-en="Launch">Lancio</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 — CANALI -->
+    <div class="slide" id="s8">
+      <span class="s-label" data-en="The Channels">I Canali</span>
+      <h2 class="s-title" data-en="Three platforms, <strong>one single story.</strong>">Tre piattaforme, <strong>un'unica storia.</strong></h2>
+      <div class="cg">
+        <div class="cc main">
+          <span class="cr" data-en="Main">Principale</span>
+          <h3>Instagram</h3>
+          <div class="cf" data-en="~1,000 current followers">~1.000 follower attuali</div>
+          <p data-en="Main visual storytelling. Renders, boatyard BTS, cinematic Reels. Heart of the Costiera 355 identity.">Visual storytelling principale. Render, BTS cantiere, Reel cinematografici. Cuore dell'identità Costiera 355.</p>
+          <div class="cfreq" data-en="From August <span>4× week</span>">Da Agosto <span>4× sett</span></div>
+        </div>
+        <div class="cc">
+          <span class="cr" data-en="Dynamic">Dinamismo</span>
+          <h3>TikTok</h3>
+          <div class="cf" data-en="~178 current followers">~178 follower attuali</div>
+          <p data-en="Raw and dynamic version. Process videos, boatyard quickcuts, vertical formats. Young and passionate community.">Versione raw e dinamica. Video di processo, quickcuts cantiere, formati verticali. Comunità giovane e appassionata.</p>
+          <div class="cfreq" data-en="From August <span>3× week</span>">Da Agosto <span>3× sett</span></div>
+        </div>
+        <div class="cc">
+          <span class="cr">B2B</span>
+          <h3>LinkedIn</h3>
+          <div class="cf" data-en="~148 current followers">~148 follower attuali</div>
+          <p data-en="Professional communication. Boatyard, partners, buyers, media. Positioning as Italian excellence in racing.">Comunicazione professionale. Cantiere, partner, buyer, media. Posizionamento come eccellenza italiana nel racing.</p>
+          <div class="cfreq" data-en="From July <span>2× week</span>">Da Luglio <span>2× sett</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 — SHOOTING -->
+    <div class="slide" id="s9">
+      <span class="s-label" data-en="Immediate Priority">Priorità Immediata</span>
+      <h2 class="s-title" data-en="Shooting <strong>23 — 24 June.</strong>">Shooting <strong>23 — 24 Giugno.</strong></h2>
+      <div class="sg">
+        <div class="sc">
+          <h4 data-en="Shots to capture">Shot da portare a casa</h4>
+          <ul>
+            <li data-en="<strong>Wide hull</strong> — full view, maximum depth"><strong>Scafo wide</strong> — visione completa, massima profondità</li>
+            <li data-en="<strong>Structural details</strong> — ribs, joints, materials"><strong>Dettagli strutturali</strong> — costole, giunzioni, materiali</li>
+            <li data-en="<strong>Hands at work</strong> — builders in action"><strong>Mani al lavoro</strong> — costruttori in azione</li>
+            <li data-en="<strong>Textures and surfaces</strong> — carbon, resins, finishes"><strong>Texture e superfici</strong> — carbonio, resine, finiture</li>
+            <li data-en="<strong>Boatyard space</strong> — atmosphere, light, scale"><strong>Spazio cantiere</strong> — atmosfera, luce, scala</li>
+            <li data-en="<strong>Interview</strong> — builder or Jesper, 60 seconds"><strong>Intervista</strong> — costruttore o Jesper, 60 secondi</li>
+          </ul>
+        </div>
+        <div class="sc">
+          <h4 data-en="Formats to cover">Formati da coprire</h4>
+          <ul>
+            <li data-en="<strong>Video 16:9</strong> — Instagram Reels and YouTube"><strong>Video 16:9</strong> — Reel Instagram e YouTube</li>
+            <li data-en="<strong>Video 9:16</strong> — TikTok and Stories"><strong>Video 9:16</strong> — TikTok e Stories</li>
+            <li data-en="<strong>Photo stills</strong> — Instagram and LinkedIn feed"><strong>Still fotografici</strong> — feed Instagram e LinkedIn</li>
+            <li data-en="<strong>Timelapse</strong> — one complete work sequence"><strong>Timelapse</strong> — una lavorazione completa</li>
+            <li data-en="<strong>Slow motion</strong> — details for the final hero video"><strong>Slow motion</strong> — dettagli per il video hero finale</li>
+            <li data-en="<strong>Cinematic B-roll</strong> — narrative material in reserve"><strong>B-roll cinematic</strong> — materiale narrativo di riserva</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 — PRESS -->
+    <div class="slide" id="s10">
+      <span class="s-label">Press & Media</span>
+      <h2 class="s-title" data-en="Getting into the <strong>right publications.</strong>">Uscire sui <strong>giornali giusti.</strong></h2>
+      <div class="prg">
+        <div class="prc">
+          <h4 data-en="Industry media">Media di settore</h4>
+          <ul>
+            <li data-en="<strong>Vela e Motore</strong> — main Italian publication"><strong>Vela e Motore</strong> — principale testata italiana</li>
+            <li data-en="<strong>Giornale della Vela</strong> — online racing community"><strong>Giornale della Vela</strong> — community online racing</li>
+            <li data-en="<strong>Sailing Today</strong> — international UK market"><strong>Sailing Today</strong> — mercato internazionale UK</li>
+            <li data-en="<strong>Yacht.de</strong> — German / European market"><strong>Yacht.de</strong> — mercato tedesco / europeo</li>
+            <li data-en="<strong>Nauticsud</strong> — southern trade show and media"><strong>Nauticsud</strong> — fiera e media meridionale</li>
+          </ul>
+        </div>
+        <div class="prc">
+          <h4 data-en="Publication timing">Timing uscite</h4>
+          <ul>
+            <li data-en="<strong>Construction press release</strong> — August, infusion phase"><strong>Comunicato costruzione</strong> — Agosto, fase infusione</li>
+            <li data-en="<strong>Technical preview</strong> — October, pre-launch"><strong>Preview tecnica</strong> — Ottobre, pre-varo</li>
+            <li data-en="<strong>Official launch</strong> — November, launch + media kit"><strong>Lancio ufficiale</strong> — Novembre, varo + media kit</li>
+            <li data-en="<strong>Cossutti Ganz angle</strong> — same designers as First 36 SE"><strong>Angolo Cossutti Ganz</strong> — stessi progettisti First 36 SE</li>
+          </ul>
+        </div>
+      </div>
+      <div class="prnote" data-en="To be defined: coordinated launch date for simultaneous release on social + press + Google Maps.">Da definire: data lancio coordinata per uscita simultanea su social + giornali + Google Maps.</div>
+    </div>
+
+    <!-- REFERENCE COMPETITOR -->
+    <div class="slide" id="sref">
+      <span class="s-label" data-en="The Market · Reference">Il Mercato · Reference</span>
+      <h2 class="s-title" data-en="Who's competing for <strong>the same client.</strong>">Chi si gioca <strong>lo stesso cliente.</strong></h2>
+      <div class="ref-grid">
+        <div class="ref-card">
+          <span class="ref-n">MAT 11</span>
+          <h3>MAT <strong>11</strong></h3>
+          <div class="ref-sub">Matteo Polli Design · Racer/Cruiser</div>
+          <div class="ref-rows">
+            <div class="ref-row"><dt data-en="Positioning">Posizionamento</dt><dd data-en="Premium racer-cruiser, Italian designer brand">Racer-cruiser premium, design firma italiana</dd></div>
+            <div class="ref-row"><dt>Target</dt><dd data-en="ORC + owners with high budget">ORC + armatori con budget alto</dd></div>
+            <div class="ref-row"><dt data-en="Communication">Comunicazione</dt><dd data-en="YouTube videos, dynamic Shorts, Giornale della Vela, ORC Worlds 2026">Video YouTube, Shorts dinamici, Giornale della Vela, Mondiale ORC 2026</dd></div>
+            <div class="ref-row"><dt data-en="Weaknesses">Punti deboli</dt><dd data-en="Less specialised in double-handed">Meno specializzato sul double handed</dd></div>
+          </div>
+          <span class="ref-tag dk" data-en="Series production">Produzione in serie</span>
+        </div>
+        <div class="ref-card">
+          <span class="ref-n">Italy Yachts · IY 9.98</span>
+          <h3>IY <strong>9.98</strong></h3>
+          <div class="ref-sub" data-en="Linea Bellissima · Dual purpose">Linea Bellissima · Dual purpose</div>
+          <div class="ref-rows">
+            <div class="ref-row"><dt data-en="Positioning">Posizionamento</dt><dd data-en="Performance cruiser with racing soul">Performance cruiser con anima racing</dd></div>
+            <div class="ref-row"><dt>Target</dt><dd data-en="Families + club racers, fast cruising">Famiglie + club racer, crociera veloce</dd></div>
+            <div class="ref-row"><dt data-en="Communication">Comunicazione</dt><dd data-en="Well-crafted website, clean visual identity">Sito curato, identità visiva pulita</dd></div>
+            <div class="ref-row"><dt data-en="Weaknesses">Punti deboli</dt><dd data-en="Less pure racing, cruising compromise">Meno puro racing, compromesso crociera</dd></div>
+          </div>
+          <span class="ref-tag dk" data-en="Series production">Produzione in serie</span>
+        </div>
+        <div class="ref-card our">
+          <span class="ref-n">Beneteau First 36 SE · Cossutti Ganz</span>
+          <h3>First <strong>36 SE</strong></h3>
+          <div class="ref-sub" data-en="Beneteau × Cossutti Ganz · ORC Planing Racer">Beneteau × Cossutti Ganz · ORC Racer planante</div>
+          <div class="ref-rows">
+            <div class="ref-row"><dt data-en="Relevance">Rilevanza</dt><dd data-en="<strong>Same designers</strong> as the Costiera 355"><strong>Stessi progettisti</strong> della Costiera 355</dd></div>
+            <div class="ref-row"><dt data-en="Communication">Comunicazione</dt><dd data-en="Professional hero videos, Solovela, Yacht.de, coordinated international releases">Video hero professionali, Solovela, Yacht.de, uscite internazionali coordinate</dd></div>
+            <div class="ref-row"><dt data-en="To replicate">Da replicare</dt><dd data-en="Coordinated social + press + video launch, technical + emotional narrative">Lancio coordinato social + press + video, narrazione tecnica + emozione</dd></div>
+            <div class="ref-row"><dt data-en="Costiera advantage">Vantaggio Costiera</dt><dd data-en="Custom commission, artisan boatyard story">Custom su commissione, storia cantiere artigianale</dd></div>
+          </div>
+          <span class="ref-tag" data-en="Communication benchmark">Benchmark comunicazione</span>
+        </div>
+      </div>
+      <div class="ref-comm" data-en="Social to monitor: <strong>@matsailingyachts</strong> · <strong>@beneteau_first</strong> · <strong>@orcsailing</strong> · <strong>@ferrarihypersail</strong> (luxury benchmark)">Social da monitorare: <strong>@matsailingyachts</strong> · <strong>@beneteau_first</strong> · <strong>@orcsailing</strong> · <strong>@ferrarihypersail</strong> (benchmark luxury)</div>
+    </div>
+
+    <!-- PASSI -->
+    <div class="slide" id="s12">
+      <span class="s-label">Action Plan</span>
+      <h2 class="s-title" data-en="Next <strong>steps.</strong>">Prossimi <strong>passi.</strong></h2>
+      <div class="pl">
+        <div class="pa"><div class="pn">01</div><div><h4 data-en="Define coordinated launch date">Definire data lancio coordinato</h4><p data-en="Social + press + Google Maps — all the same day.">Social + press + Google Maps — tutto lo stesso giorno.</p></div><div class="ps hot" data-en="July">Luglio</div></div>
+        <div class="pa"><div class="pn">02</div><div><h4 data-en="Boatyard shooting coverage">Copertura shooting cantiere</h4><p data-en="23-24 June, 30 June, July — hull infusion and construction.">23-24 giugno, 30 giugno, luglio — infusione scafo e costruzione.</p></div><div class="ps hot" data-en="Ongoing">In corso</div></div>
+        <div class="pa"><div class="pn">03</div><div><h4 data-en="Unified social visual identity">Visual identity social unificata</h4><p data-en="Bio, profile picture, cover on Instagram, TikTok, LinkedIn.">Bio, immagine profilo, cover su Instagram, TikTok, LinkedIn.</p></div><div class="ps" data-en="July">Luglio</div></div>
+        <div class="pa"><div class="pn">04</div><div><h4 data-en="Website plan — two sections">Piano sito web — due sezioni</h4><p data-en="Motor boats (CY39) + sailing boats (Costiera 355).">Barche a motore (CY39) + barche a vela (Costiera 355).</p></div><div class="ps" data-en="July">Luglio</div></div>
+        <div class="pa"><div class="pn">05</div><div><h4 data-en="Sailing line name + August content calendar">Nome linea vela + content calendar agosto</h4><p data-en="Official line naming. First month of planned storytelling.">Naming ufficiale linea. Primo mese di storytelling pianificato.</p></div><div class="ps" data-en="August">Agosto</div></div>
+      </div>
+    </div>
+
+    <!-- SITO WEB -->
+    <div class="slide sito-slide" id="ssito">
+      <span class="s-label lt" data-en="The Website · New Structure">Il Sito Web · Nuova Struttura</span>
+      <h2 class="s-title wh" data-en="Two sections.<br><strong>One single identity.</strong>">Due sezioni.<br><strong>Un'unica identità.</strong></h2>
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="browser-dots"><span></span><span></span><span></span></div>
+          <div class="browser-url">costierayacht.com</div>
+        </div>
+        <div class="browser-content">
+          <div class="mini-nav">
+            <img src="images/logo-black.png" alt="Costiera Yacht" />
+            <div class="links">
+              <span class="new-tag">Costiera 355</span>
+              <span>CY 39</span>
+              <span data-en="The Project">Il Progetto</span>
+              <span data-en="Contacts">Contatti</span>
+            </div>
+            <div class="cta" data-en="Request Info">Richiedi Info</div>
+          </div>
+          <div class="mini-hero">
+            <div class="mh-vela">
+              <div class="mh-content">
+                <span class="mh-tag" data-en="New Line · 2026">Nuova Linea · 2026</span>
+                <h3>Costiera <strong>355</strong></h3>
+                <p data-en="Racing sailboat.<br>ORC Racing · Custom commission.">Barca a vela da competizione.<br>ORC Racing · Costruzione su commissione.</p>
+                <div class="mh-btn br" data-en="Discover sailing →">Scopri la vela →</div>
+              </div>
+            </div>
+            <div class="mh-divider"></div>
+            <div class="mh-label" data-en="Choose your course">Scegli la tua rotta</div>
+            <div class="mh-motore">
+              <div class="mh-content">
+                <span class="mh-tag" data-en="Motor Boats">Barche a Motore</span>
+                <h3>CY <strong>39</strong></h3>
+                <p data-en="The Costiera motor yacht.<br>Elegance · Performance · Comfort.">Lo yacht a motore di Costiera.<br>Eleganza · Performance · Comfort.</p>
+                <div class="mh-btn" data-en="Discover motor →">Scopri il motore →</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMMAGINE: BARCA IN BAIA (AI) -->
+    <div class="slide img-slide" id="si3">
+      <div class="ibg" style="background-image: url('images/gen-cove.png'); background-position: center;"></div>
+      <div class="icontent">
+        <span class="ilabel" data-en="Costiera · The Sea">Costiera · Il Mare</span>
+        <h2 data-en="Costiera 355<br><em>November 2026.</em>">Costiera 355<br><em>Novembre 2026.</em></h2>
+      </div>
+    </div>
+
+    <!-- IMMAGINE: AERIAL (AI) + VARO -->
+    <div class="slide img-slide" id="si4">
+      <div class="ibg" style="background-image: url('images/gen-aerial.png'); background-position: center;"></div>
+      <div class="icontent">
+        <span class="ilabel" data-en="November 2026 · The Launch">Novembre 2026 · Il Varo</span>
+        <h2 data-en="From the yard<br>to the <em>sea.</em>">Dal cantiere<br>al <em>mare.</em></h2>
+      </div>
+    </div>
+
+    <!-- 15 — CLOSING -->
+    <div class="slide" id="s13">
+      <div class="content">
+        <span class="cl" data-en="Costiera 355 · November 2026">Costiera 355 · Novembre 2026</span>
+        <h2 data-en="<em>&ldquo;Feel the course.<br>Master the wave.<br><strong>Win by instinct.&rdquo;</strong></em>"><em>"Senti la rotta.<br>Domina l'onda.<br><strong>Vinci d'istinto."</strong></em></h2>
+        <p class="sub" data-en="Costiera Yacht · Social Launch Plan · 2026">Costiera Yacht · Piano di Lancio Social · 2026</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NAV -->
+  <div class="nav-ui">
+    <div class="nav-btn disabled" id="bp">&#8592;</div>
+    <div class="slide-counter" id="cnt">1 / 13</div>
+    <div class="nav-btn" id="bn">&#8594;</div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="pf" style="width:7.69%"></div></div>
+
+  <script>
+    // Video cover — parte e riloopa dal secondo 4
+    const vid = document.getElementById('cover-video');
+    if (vid) {
+      vid.addEventListener('loadedmetadata', () => { vid.currentTime = 2; vid.play(); });
+      vid.addEventListener('ended', () => { vid.currentTime = 2; vid.play(); });
+    }
+
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let cur = 0;
+    const bp = document.getElementById('bp');
+    const bn = document.getElementById('bn');
+    const cnt = document.getElementById('cnt');
+    const pf = document.getElementById('pf');
+
+    function ui() {
+      cnt.textContent = (cur+1) + ' / ' + total;
+      pf.style.width = ((cur+1)/total*100) + '%';
+      bp.classList.toggle('disabled', cur===0);
+      bn.classList.toggle('disabled', cur===total-1);
+    }
+    function go(n) {
+      if (n<0||n>=total) return;
+      slides[cur].classList.remove('active');
+      cur=n;
+      slides[cur].classList.add('active');
+      ui();
+    }
+    bn.addEventListener('click', ()=>go(cur+1));
+    bp.addEventListener('click', ()=>go(cur-1));
+    document.addEventListener('keydown', e=>{
+      if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();go(cur+1);}
+      if(e.key==='ArrowLeft'){e.preventDefault();go(cur-1);}
+    });
+    let tx=0;
+    document.addEventListener('touchstart', e=>tx=e.touches[0].clientX);
+    document.addEventListener('touchend', e=>{
+      const d=tx-e.changedTouches[0].clientX;
+      if(Math.abs(d)>50) d>0?go(cur+1):go(cur-1);
+    });
+    ui();
+
+    // ─── LANGUAGE TOGGLE ───
+    let lang = 'it';
+    function toggleLang() {
+      lang = lang === 'it' ? 'en' : 'it';
+      document.querySelectorAll('[data-en]').forEach(el => {
+        if (!el._it) el._it = el.innerHTML;
+        el.innerHTML = lang === 'en' ? el.getAttribute('data-en') : el._it;
+      });
+      document.getElementById('lang-btn').textContent = lang === 'it' ? '🇬🇧' : '🇮🇹';
+    }
+  </script>
+</body>
+</html>
