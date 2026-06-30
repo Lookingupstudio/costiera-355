@@ -307,25 +307,29 @@
     .barca-short { display: grid; grid-template-columns: 1fr 1px 1fr; flex: 1; gap: 0; }
     .barca-short-col { padding: 0 44px 0 0; display: flex; flex-direction: column; gap: 20px; }
     .barca-short-col + .barca-short-col { padding: 0 0 0 44px; }
-    .barca-intro { font-size: 18px; font-weight: 200; color: rgba(255,255,255,.7); line-height: 1.7; }
+    .barca-intro { font-size: 20px; font-weight: 200; color: rgba(255,255,255,.7); line-height: 1.7; }
     .barca-intro strong { color: #fff; font-weight: 600; }
     .barca-keys { list-style: none; display: flex; flex-direction: column; gap: 2px; }
-    .barca-keys li { font-size: 13px; color: rgba(255,255,255,.45); padding: 11px 16px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); padding-left: 28px; position: relative; line-height: 1.5; }
+    .barca-keys li { font-size: 15px; color: rgba(255,255,255,.45); padding: 12px 16px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); padding-left: 28px; position: relative; line-height: 1.5; }
     .barca-keys li::before { content: '—'; position: absolute; left: 12px; color: var(--brass); }
     .barca-keys li strong { color: rgba(255,255,255,.8); font-weight: 600; }
     .barca-slogans { display: flex; flex-direction: column; gap: 2px; flex: 1; }
-    .barca-slogan { padding: 14px 20px; border-left: 2px solid rgba(160,120,48,.3); }
+    .barca-slogan { padding: 15px 22px; border-left: 2px solid rgba(160,120,48,.3); }
     .barca-slogan.main { border-left-color: var(--brass); }
-    .barca-slogan p { font-size: 14px; font-style: italic; color: rgba(255,255,255,.45); line-height: 1.6; }
-    .barca-slogan.main p { font-size: 16px; color: var(--brass-lt); }
+    .barca-slogan p { font-size: 15px; font-style: italic; color: rgba(255,255,255,.45); line-height: 1.6; }
+    .barca-slogan.main p { font-size: 18px; color: var(--brass-lt); }
     /* ─── COMUNICATO STAMPA ─── */
     #scomunicato { background: var(--off); padding: 60px 80px 108px; }
     #scomunicato .s-label { color: var(--brass); margin-bottom: 10px; }
-    #scomunicato .s-title { margin-bottom: 28px; }
-    .comunicato-body { columns: 2; column-gap: 48px; flex: 1; }
-    .comunicato-body p { font-size: 13px; color: var(--muted); line-height: 1.9; break-inside: avoid; margin-bottom: 14px; }
+    #scomunicato .s-title { margin-bottom: 20px; }
+    .comunicato-body { columns: 2; column-gap: 48px; }
+    .comunicato-body p { font-size: 13px; color: var(--muted); line-height: 1.9; break-inside: avoid; margin-bottom: 12px; }
     .comunicato-body p strong { color: var(--navy); font-weight: 600; }
     .comunicato-body p em { color: var(--brass); font-style: italic; }
+    .comunicato-imgs { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-top: 20px; height: 180px; }
+    .comunicato-imgs .ci { background-size: cover; background-position: center; position: relative; overflow: hidden; }
+    .comunicato-imgs .ci::after { content: ''; position: absolute; inset: 0; background: rgba(8,18,32,.18); transition: background .3s; }
+    .comunicato-imgs .ci:hover::after { background: rgba(8,18,32,.0); }
     .barca-body { display: grid; grid-template-columns: 1fr 1px 1fr; flex: 1; gap: 0; }
     .barca-col { padding: 0 40px 0 0; display: flex; flex-direction: column; }
     .barca-col + .barca-col { padding: 0 0 0 40px; }
@@ -636,7 +640,7 @@
 
     <!-- COMUNICATO STAMPA -->
     <div class="slide" id="scomunicato">
-      <span class="s-label" data-en="Press Release · Example">Comunicato Stampa · Esempio</span>
+      <span class="s-label" data-en="Press Release">Comunicato Stampa</span>
       <h2 class="s-title" data-en="The full <strong>description.</strong>">La descrizione <strong>completa.</strong></h2>
       <div class="comunicato-body">
         <p data-en="Our first sailing boat was born for one single mission: <strong>to compete and win</strong>, with pure emotion.">La nostra prima imbarcazione a vela nasce per una sola missione: <strong>competere e vincere</strong>, con emozione pura.</p>
@@ -646,6 +650,11 @@
         <p data-en="Below deck, function meets freedom: customisable layout, structural, essential and intelligent interiors, designed to adapt without ever compromising performance.">Sottocoperta, la funzione incontra la libertà: layout personalizzabile, interni strutturali, essenziali e intelligenti, progettati per adattarsi senza mai compromettere la performance.</p>
         <p data-en="The construction is uncompromising: hull, deck and bulkheads in infusion, metal structural spider, carbon rudder and shaft, composite and lead keel. Rigidity, lightness and reliability combine for one single goal: <em>to take you always further.</em>">La costruzione è senza compromessi: scafo, coperta e paratie in infusione, ragno strutturale in metallo, timone e asse in carbonio, deriva in composito e piombo. Rigidità, leggerezza e affidabilità si fondono per un unico obiettivo: <em>portarti sempre oltre.</em></p>
         <p data-en="<strong>This is not just a boat. It is the exact moment when everything aligns: sea, wind, instinct. And you win.</strong>"><strong>Questa non è solo una barca. È il momento esatto in cui tutto si allinea: mare, vento, istinto. E vinci.</strong></p>
+      </div>
+      <div class="comunicato-imgs">
+        <div class="ci" style="background-image:url('images/gen-racing.png'); background-position: center 30%;"></div>
+        <div class="ci" style="background-image:url('images/render-1.png'); background-position: center;"></div>
+        <div class="ci" style="background-image:url('images/gen-hero-vela.png'); background-position: center 40%;"></div>
       </div>
     </div>
 
