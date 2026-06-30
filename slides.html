@@ -294,8 +294,30 @@
     #sbarca { background: var(--navy); }
     #sbarca::before { content: '355'; position: absolute; right: -40px; top: 50%; transform: translateY(-50%); font-size: clamp(180px, 28vw, 360px); font-weight: 800; color: rgba(255,255,255,.03); pointer-events: none; }
     #sbarca .s-label { color: var(--brass-lt); }
-    #sbarca .s-title { color: #fff; margin-bottom: 20px; }
+    #sbarca .s-title { color: #fff; margin-bottom: 28px; }
     #sbarca .s-title strong { color: var(--brass-lt); }
+    .barca-short { display: grid; grid-template-columns: 1fr 1px 1fr; flex: 1; gap: 0; }
+    .barca-short-col { padding: 0 44px 0 0; display: flex; flex-direction: column; gap: 20px; }
+    .barca-short-col + .barca-short-col { padding: 0 0 0 44px; }
+    .barca-intro { font-size: 18px; font-weight: 200; color: rgba(255,255,255,.7); line-height: 1.7; }
+    .barca-intro strong { color: #fff; font-weight: 600; }
+    .barca-keys { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .barca-keys li { font-size: 13px; color: rgba(255,255,255,.45); padding: 11px 16px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); padding-left: 28px; position: relative; line-height: 1.5; }
+    .barca-keys li::before { content: '—'; position: absolute; left: 12px; color: var(--brass); }
+    .barca-keys li strong { color: rgba(255,255,255,.8); font-weight: 600; }
+    .barca-slogans { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+    .barca-slogan { padding: 14px 20px; border-left: 2px solid rgba(160,120,48,.3); }
+    .barca-slogan.main { border-left-color: var(--brass); }
+    .barca-slogan p { font-size: 14px; font-style: italic; color: rgba(255,255,255,.45); line-height: 1.6; }
+    .barca-slogan.main p { font-size: 16px; color: var(--brass-lt); }
+    /* ─── COMUNICATO STAMPA ─── */
+    #scomunicato { background: var(--off); padding: 60px 80px 108px; }
+    #scomunicato .s-label { color: var(--brass); margin-bottom: 10px; }
+    #scomunicato .s-title { margin-bottom: 28px; }
+    .comunicato-body { columns: 2; column-gap: 48px; flex: 1; }
+    .comunicato-body p { font-size: 13px; color: var(--muted); line-height: 1.9; break-inside: avoid; margin-bottom: 14px; }
+    .comunicato-body p strong { color: var(--navy); font-weight: 600; }
+    .comunicato-body p em { color: var(--brass); font-style: italic; }
     .barca-body { display: grid; grid-template-columns: 1fr 1px 1fr; flex: 1; gap: 0; }
     .barca-col { padding: 0 40px 0 0; display: flex; flex-direction: column; }
     .barca-col + .barca-col { padding: 0 0 0 40px; }
@@ -500,7 +522,7 @@
     <!-- 1 — COVER -->
     <div class="slide active" id="s1">
       <div class="bg"></div>
-      <video class="bg-video" autoplay muted playsinline id="cover-video">
+      <video class="bg-video" autoplay muted playsinline id="cover-video" poster="images/render-1.png">
         <source src="images/video-cover.mp4" type="video/mp4">
       </video>
       <div class="content" style="position:relative;z-index:2;">
@@ -553,35 +575,56 @@
       </div>
     </div>
 
-    <!-- LA BARCA — descrizione + specifiche -->
+    <!-- LA BARCA — versione compatta -->
     <div class="slide" id="sbarca">
       <span class="s-label lt" data-en="The Boat">La Barca</span>
       <h2 class="s-title" data-en="One single <strong>mission.</strong>">Una sola <strong>missione.</strong></h2>
-      <div class="barca-body">
-        <div class="barca-col">
-          <div class="barca-desc">
-            <p data-en="Our first sailing boat was born for one single mission: <strong>to compete and win</strong>, with pure emotion.">La nostra prima imbarcazione a vela nasce per una sola missione: <strong>competere e vincere</strong>, con emozione pura.</p>
-            <p data-en="Designed from the outset for the <strong>ORC class</strong>, it is a racing machine that transforms every mile into adrenaline. It is the moment you catch the wave, the boat accelerates, the helm <em>vibrates alive</em> in your hands and everything becomes instinct: perfect trajectory, full speed, absolute control. It is that mark rounding where every move feels natural, precise, inevitable.">Progettata fin dall'origine per la <strong>classe ORC</strong>, è una macchina da regata che trasforma ogni miglio in adrenalina. È il momento in cui agganci l'onda, la barca accelera, il timone <em>vibra vivo</em> tra le mani e tutto diventa istinto: traiettoria perfetta, velocità piena, controllo assoluto. È quel passaggio alla boa in cui ogni gesto è naturale, preciso, inevitabile.</p>
-            <p data-en="Built for long races, it performs at its best with a full crew but expresses its true essence when <strong>double-handed</strong>, where synergy, ergonomics and sensitivity make all the difference. The helmsman is at the centre: dominant position, full visibility, direct connection with the boat and the sea.">Pensata per lunghe regate, dà il massimo in equipaggio ma esprime la sua vera essenza nella conduzione <strong>in doppio</strong>, dove sintonia, ergonomia e sensibilità fanno la differenza. Il timoniere è al centro: posizione dominante, visibilità totale, feeling diretto con la barca e con il mare.</p>
-            <p data-en="The <strong>retractable bowsprit</strong> unleashes power when needed, while the deck is designed for quick, clean, instinctive manoeuvres: everything is where it should be, everything responds without hesitation.">Il <strong>bompresso retrattile</strong> libera potenza quando serve, mentre la coperta è disegnata per manovre rapide, pulite, istintive: tutto è dove deve essere, tutto risponde senza esitazioni.</p>
-            <p data-en="Below deck, function meets freedom: customisable layout, structural, essential and intelligent interiors, designed to adapt without ever compromising performance.">Sottocoperta, la funzione incontra la libertà: layout personalizzabile, interni strutturali, essenziali e intelligenti, progettati per adattarsi senza mai compromettere la performance.</p>
-            <p data-en="The construction is uncompromising: hull, deck and bulkheads in infusion, metal structural spider, carbon rudder and shaft, composite and lead keel. Rigidity, lightness and reliability combine for one single goal: to take you always further.">La costruzione è senza compromessi: scafo, coperta e paratie in infusione, ragno strutturale in metallo, timone e asse in carbonio, deriva in composito e piombo. Rigidità, leggerezza e affidabilità si fondono per un unico obiettivo: portarti sempre oltre.</p>
-          </div>
-          <div class="barca-closing" data-en="This is not just a boat. It is the exact moment when everything aligns: sea, wind, instinct. And you win.">Questa non è solo una barca. È il momento esatto in cui tutto si allinea: mare, vento, istinto. E vinci.</div>
+      <div class="barca-short">
+        <div class="barca-short-col">
+          <p class="barca-intro" data-en="First <strong>ORC racing sailboat</strong> by Costiera Yacht. Designed by <strong>Cossutti Ganz</strong>. Built for competition, for those who sail in pairs or with a full crew. <strong>Launch: November 2026.</strong>">Prima <strong>barca a vela da regata ORC</strong> di Costiera Yacht. Progettata da <strong>Cossutti Ganz</strong>. Costruita per competere, per chi naviga in doppio o con equipaggio. <strong>Varo: Novembre 2026.</strong></p>
+          <ul class="barca-keys">
+            <li data-en="<strong>Class:</strong> ORC Racing · Double Handed"><strong>Classe:</strong> ORC Racing · Double Handed</li>
+            <li data-en="<strong>Construction:</strong> Hull, deck and bulkheads in infusion"><strong>Costruzione:</strong> Scafo, coperta e paratie in infusione</li>
+            <li data-en="<strong>Appendages:</strong> Carbon rudder · Composite + lead keel"><strong>Appendici:</strong> Timone in carbonio · Deriva composito + piombo</li>
+            <li data-en="<strong>Deck:</strong> Retractable bowsprit · Instinctive manoeuvres"><strong>Coperta:</strong> Bompresso retrattile · Manovre istintive</li>
+            <li data-en="<strong>Interior:</strong> Customisable layout · No compromises on performance"><strong>Interni:</strong> Layout personalizzabile · Nessun compromesso sulla performance</li>
+          </ul>
         </div>
         <div class="barca-sep"></div>
-        <div class="barca-col">
-          <div class="barca-specs">
-            <div class="barca-spec"><dt data-en="Class">Classe</dt><dd>ORC Racing · Double Handed</dd></div>
-            <div class="barca-spec"><dt data-en="Construction">Costruzione</dt><dd data-en="Hull, deck and bulkheads in infusion">Scafo, coperta e paratie in infusione</dd></div>
-            <div class="barca-spec"><dt data-en="Structure">Struttura</dt><dd data-en="Metal structural spider">Ragno strutturale in metallo</dd></div>
-            <div class="barca-spec"><dt data-en="Appendages">Appendici</dt><dd data-en="Carbon rudder and shaft · Composite + lead keel">Timone e asse in carbonio · Deriva composito + piombo</dd></div>
-            <div class="barca-spec"><dt data-en="Deck">Coperta</dt><dd data-en="Retractable bowsprit · Quick, instinctive manoeuvres">Bompresso retrattile · Manovre rapide e istintive</dd></div>
-            <div class="barca-spec"><dt data-en="Interior">Interni</dt><dd data-en="Customisable layout · Essential, intelligent">Layout personalizzabile · Essenziali, intelligenti</dd></div>
-            <div class="barca-spec"><dt data-en="Designers">Progettisti</dt><dd>Cossutti Ganz</dd></div>
-            <div class="barca-spec"><dt data-en="Launch">Varo</dt><dd data-en="November 2026">Novembre 2026</dd></div>
+        <div class="barca-short-col">
+          <div class="barca-slogans">
+            <div class="barca-slogan main">
+              <p data-en="&ldquo;Feel the course. Master the wave. Win by instinct.&rdquo;">"Senti la rotta. Domina l'onda. Vinci d'istinto."</p>
+            </div>
+            <div class="barca-slogan">
+              <p data-en="&ldquo;This is not just a boat.&rdquo;">"Questa non è solo una barca."</p>
+            </div>
+            <div class="barca-slogan">
+              <p data-en="&ldquo;The exact moment when everything aligns: sea, wind, instinct. And you win.&rdquo;">"Il momento esatto in cui tutto si allinea: mare, vento, istinto. E vinci."</p>
+            </div>
+            <div class="barca-slogan">
+              <p data-en="&ldquo;To take you always further.&rdquo;">"Portarti sempre oltre."</p>
+            </div>
+            <div class="barca-slogan">
+              <p data-en="&ldquo;Compete and win, with pure emotion.&rdquo;">"Competere e vincere, con emozione pura."</p>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <!-- COMUNICATO STAMPA -->
+    <div class="slide" id="scomunicato">
+      <span class="s-label" data-en="Press Release · Example">Comunicato Stampa · Esempio</span>
+      <h2 class="s-title" data-en="The full <strong>description.</strong>">La descrizione <strong>completa.</strong></h2>
+      <div class="comunicato-body">
+        <p data-en="Our first sailing boat was born for one single mission: <strong>to compete and win</strong>, with pure emotion.">La nostra prima imbarcazione a vela nasce per una sola missione: <strong>competere e vincere</strong>, con emozione pura.</p>
+        <p data-en="Designed from the outset for the <strong>ORC class</strong>, it is a racing machine that transforms every mile into adrenaline. It is the moment you catch the wave, the boat accelerates, the helm <em>vibrates alive</em> in your hands and everything becomes instinct: perfect trajectory, full speed, absolute control. It is that mark rounding where every move feels natural, precise, inevitable.">Progettata fin dall'origine per la <strong>classe ORC</strong>, è una macchina da regata che trasforma ogni miglio in adrenalina. È il momento in cui agganci l'onda, la barca accelera, il timone <em>vibra vivo</em> tra le mani e tutto diventa istinto: traiettoria perfetta, velocità piena, controllo assoluto. È quel passaggio alla boa in cui ogni gesto è naturale, preciso, inevitabile.</p>
+        <p data-en="Built for long races, it performs at its best with a full crew but expresses its true essence when <strong>double-handed</strong>, where synergy, ergonomics and sensitivity make all the difference. The helmsman is at the centre: dominant position, full visibility, direct connection with the boat and the sea.">Pensata per lunghe regate, dà il massimo in equipaggio ma esprime la sua vera essenza nella conduzione <strong>in doppio</strong>, dove sintonia, ergonomia e sensibilità fanno la differenza. Il timoniere è al centro: posizione dominante, visibilità totale, feeling diretto con la barca e con il mare.</p>
+        <p data-en="The <strong>retractable bowsprit</strong> unleashes power when needed, while the deck is designed for quick, clean, instinctive manoeuvres: everything is where it should be, everything responds without hesitation.">Il <strong>bompresso retrattile</strong> libera potenza quando serve, mentre la coperta è disegnata per manovre rapide, pulite, istintive: tutto è dove deve essere, tutto risponde senza esitazioni.</p>
+        <p data-en="Below deck, function meets freedom: customisable layout, structural, essential and intelligent interiors, designed to adapt without ever compromising performance.">Sottocoperta, la funzione incontra la libertà: layout personalizzabile, interni strutturali, essenziali e intelligenti, progettati per adattarsi senza mai compromettere la performance.</p>
+        <p data-en="The construction is uncompromising: hull, deck and bulkheads in infusion, metal structural spider, carbon rudder and shaft, composite and lead keel. Rigidity, lightness and reliability combine for one single goal: <em>to take you always further.</em>">La costruzione è senza compromessi: scafo, coperta e paratie in infusione, ragno strutturale in metallo, timone e asse in carbonio, deriva in composito e piombo. Rigidità, leggerezza e affidabilità si fondono per un unico obiettivo: <em>portarti sempre oltre.</em></p>
+        <p data-en="<strong>This is not just a boat. It is the exact moment when everything aligns: sea, wind, instinct. And you win.</strong>"><strong>Questa non è solo una barca. È il momento esatto in cui tutto si allinea: mare, vento, istinto. E vinci.</strong></p>
       </div>
     </div>
 
@@ -604,32 +647,29 @@
         <div class="tg-card">
           <div class="tg-n">01</div>
           <h3>Racer ORC "Full Campaign"</h3>
-          <div class="tg-sub" data-en="Experienced owner or structured team">Armatore esperto o team strutturato</div>
-          <div class="tg-row"><dt data-en="Goal">Obiettivo</dt><dd data-en="Podium, results, continuity">Podio, risultati, continuità</dd></div>
-          <div class="tg-row"><dt>Driver</dt><dd data-en="ORC rating, stiffness, real speed">Rating ORC, rigidità, velocità reale</dd></div>
+          <div class="tg-sub" data-en="Owner buys, captain decides · Crew 8–9">Armatore compra, capitano decide · Equipaggio 8–9</div>
+          <div class="tg-row"><dt data-en="Goal">Obiettivo</dt><dd data-en="Podium, results, continuity — big campaigns">Podio, risultati, continuità · campagne mondiali</dd></div>
+          <div class="tg-row"><dt data-en="Key influencer">Influencer chiave</dt><dd data-en="The captain: spots the boat, convinces the owner">Il capitano: adocchia la barca, convince l'armatore</dd></div>
           <div class="tg-row"><dt data-en="Approach">Approccio</dt><dd data-en="Seasonal campaigns, dedicated budget">Campagne stagionali, budget dedicato</dd></div>
           <span class="tg-key" data-en="Pure racing machine">Macchina da regata pura</span>
-          <div class="tg-note" data-en="&ldquo;Engineering, construction, numbers.&rdquo;">"Ingegneria, costruzione, numeri."</div>
         </div>
-        <div class="tg-card">
+        <div class="tg-card" style="border-top: 3px solid var(--brass);">
           <div class="tg-n">02</div>
           <h3>Double Handed Specialist</h3>
-          <div class="tg-sub" data-en="Maximum efficiency in reduced crew">Massima efficienza in equipaggio ridotto</div>
-          <div class="tg-row"><dt data-en="Goal">Obiettivo</dt><dd data-en="Maximum efficiency as a pair">Efficienza massima in due</dd></div>
-          <div class="tg-row"><dt>Driver</dt><dd data-en="Ergonomics, total control">Ergonomia, controllo totale</dd></div>
-          <div class="tg-row"><dt data-en="Approach">Approccio</dt><dd data-en="Offshore, man-boat synergy">Offshore, sintonia uomo-barca</dd></div>
-          <span class="tg-key" data-en="Instinct, control, feeling">Istinto, controllo, feeling</span>
-          <div class="tg-note" data-en="&ldquo;Must be told like a tribe.&rdquo;">"Va raccontato come una tribù."</div>
+          <div class="tg-sub" data-en="Maximum efficiency · Just the two of them">Efficienza massima · Solo in due</div>
+          <div class="tg-row"><dt data-en="Goal">Obiettivo</dt><dd data-en="Maximum efficiency as a pair · Offshore">Efficienza massima in due · Offshore</dd></div>
+          <div class="tg-row"><dt>Driver</dt><dd data-en="Ergonomics, direct feel, man-boat synergy">Ergonomia, feeling diretto, sintonia uomo-barca</dd></div>
+          <div class="tg-row"><dt data-en="Approach">Approccio</dt><dd data-en="Long races, total control">Regate lunghe, controllo totale</dd></div>
+          <span class="tg-key" style="background:var(--navy);color:var(--brass-lt);" data-en="★ Our main target">★ Il nostro caso</span>
         </div>
         <div class="tg-card">
           <div class="tg-n">03</div>
           <h3>Performance Cruiser / Racer</h3>
-          <div class="tg-sub" data-en="Dual soul without compromise">Doppia anima senza compromessi</div>
+          <div class="tg-sub" data-en="Dual soul · High competition">Doppia anima · Alta concorrenza</div>
           <div class="tg-row"><dt data-en="Goal">Obiettivo</dt><dd data-en="High-performance fun">Divertimento ad alte prestazioni</dd></div>
           <div class="tg-row"><dt>Driver</dt><dd data-en="Emotion, speed, sharing">Emozione, velocità, condivisione</dd></div>
-          <div class="tg-row"><dt data-en="Approach">Approccio</dt><dd data-en="Racing + cruising with family">Regate + crociera con famiglia</dd></div>
+          <div class="tg-row"><dt data-en="Note">Nota</dt><dd data-en="Many boats targeting this buyer — high competition">Molte barche puntano a questo buyer — mercato competitivo</dd></div>
           <span class="tg-key" data-en="Experience above all">Esperienza prima di tutto</span>
-          <div class="tg-note" data-en="&ldquo;Experience, not just performance.&rdquo;">"Esperienza, non solo performance."</div>
         </div>
       </div>
     </div>
