@@ -220,16 +220,19 @@
        SLIDE 8 — CANALI
     ═══════════════════════════════════════ */
     #s8 { background: var(--off); }
-    .cg { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 40px; flex: 1; }
-    .cc { padding: 48px 40px; background: var(--white); border: 1px solid rgba(160,120,48,.08); transition: border-color .3s; display: flex; flex-direction: column; }
+    .cg { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 40px; flex: 1; }
+    .cc { padding: 32px 28px; background: var(--white); border: 1px solid rgba(160,120,48,.08); transition: border-color .3s; display: flex; flex-direction: column; }
     .cc.main { border-top: 4px solid var(--brass); }
     .cc:hover { border-color: rgba(160,120,48,.3); }
-    .cc .cr { font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--brass); margin-bottom: 12px; display: block; }
-    .cc h3 { font-size: 36px; font-weight: 200; color: var(--navy); margin-bottom: 6px; }
-    .cc .cf { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
-    .cc p { font-size: 15px; line-height: 1.85; color: var(--muted); flex: 1; }
-    .cc .cfreq { margin-top: 28px; padding-top: 22px; border-top: 1px solid rgba(160,120,48,.12); font-size: 12px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
-    .cc .cfreq span { font-size: 18px; font-weight: 400; letter-spacing: 0; color: var(--navy); }
+    .cc .cr { font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--brass); margin-bottom: 10px; display: block; }
+    .cc h3 { font-size: 28px; font-weight: 200; color: var(--navy); margin-bottom: 4px; }
+    .cc .cf { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+    .cc ul { list-style: none; flex: 1; }
+    .cc ul li { font-size: 13px; line-height: 1.6; color: var(--muted); padding: 6px 0 6px 14px; border-bottom: 1px solid rgba(160,120,48,.06); position: relative; }
+    .cc ul li:last-child { border-bottom: none; }
+    .cc ul li::before { content: '—'; position: absolute; left: 0; color: rgba(160,120,48,.4); font-size: 10px; top: 8px; }
+    .cc .cfreq { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(160,120,48,.12); font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+    .cc .cfreq span { font-size: 16px; font-weight: 400; letter-spacing: 0; color: var(--navy); }
 
     /* ═══════════════════════════════════════
        SLIDE 9 — SHOOTING
@@ -306,6 +309,65 @@
     .barca-spec { padding: 11px 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06); }
     .barca-spec dt { font-size: 10px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--brass); margin-bottom: 4px; }
     .barca-spec dd { font-size: 13.5px; color: rgba(255,255,255,.7); line-height: 1.4; }
+
+    /* ─── TARGET SECONDARI ─── */
+    .tslide.secondary { background: #ebebea; }
+    .tslide.secondary .tg-card { background: #f2f1ef; border-color: rgba(0,0,0,.06); }
+    .tslide.secondary .tg-n { color: rgba(0,0,0,.07); }
+    .tslide.secondary .tg-card h3 { color: #6a7a8a; }
+    .tslide.secondary .tg-card .tg-sub { color: #aab0b8; }
+    .tslide.secondary .tg-card .tg-row dt { color: #aab0b8; }
+    .tslide.secondary .tg-card .tg-row dd { color: #8a9098; }
+    .tslide.secondary .tg-card .tg-key { background: #8a9aaa; color: #fff; }
+    .tslide.secondary .tg-card .tg-note { color: #aab0b8; border-color: rgba(0,0,0,.06); }
+    .primary-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: #fff; background: var(--brass); padding: 5px 14px; margin-bottom: 12px; }
+    .secondary-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: #8a9aaa; border: 1px solid #c0c8d0; padding: 5px 14px; margin-bottom: 12px; }
+
+    /* ─── CONTENUTI 2026 SLIDE ─── */
+    #scontenuti { background: var(--white); }
+    #scontenuti .s-label { color: var(--brass); }
+    .cont-head { display: flex; align-items: baseline; gap: 24px; margin-bottom: 28px; }
+    .cont-cal { font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); border: 1px solid rgba(160,120,48,.2); padding: 6px 16px; }
+    .cont-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 2px; flex: 1; }
+    .cont-card { padding: 24px 20px; border: 1px solid rgba(160,120,48,.08); display: flex; flex-direction: column; }
+    .cont-card.emotion { background: var(--navy); border-color: transparent; }
+    .cont-card.auth { background: var(--off); }
+    .cont-card.cred { background: #f0f2f4; }
+    .cont-card.peak { background: #0d2a1a; border-color: transparent; }
+    .cont-pct { font-size: 38px; font-weight: 200; line-height: 1; margin-bottom: 12px; }
+    .cont-card.emotion .cont-pct { color: var(--brass-lt); }
+    .cont-card.auth .cont-pct { color: var(--brass); }
+    .cont-card.cred .cont-pct { color: #6a7a8a; }
+    .cont-card.peak .cont-pct { color: #2adc70; }
+    .cont-card h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
+    .cont-card.emotion h3, .cont-card.peak h3 { color: rgba(255,255,255,.85); }
+    .cont-card.auth h3, .cont-card.cred h3 { color: var(--navy); }
+    .cont-card p { font-size: 12px; line-height: 1.7; flex: 1; }
+    .cont-card.emotion p, .cont-card.peak p { color: rgba(255,255,255,.35); }
+    .cont-card.auth p, .cont-card.cred p { color: var(--muted); }
+    .cont-role { margin-top: 16px; font-size: 9px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; padding: 5px 10px; display: inline-block; }
+    .cont-card.emotion .cont-role { background: rgba(160,120,48,.25); color: var(--brass-lt); }
+    .cont-card.auth .cont-role { background: rgba(160,120,48,.12); color: var(--brass); }
+    .cont-card.cred .cont-role { background: rgba(100,120,140,.12); color: #5a7a8a; }
+    .cont-card.peak .cont-role { background: rgba(42,220,112,.15); color: #2adc70; }
+
+    /* ─── EMOTIONAL GRAPH ─── */
+    #sgraph { background: var(--navy); align-items: center; justify-content: center; }
+    #sgraph .s-label { color: var(--brass-lt); }
+    #sgraph .s-title { color: #fff; margin-bottom: 48px; }
+    .graph-wrap { display: flex; gap: 72px; align-items: center; }
+    .donut-wrap { position: relative; width: 280px; height: 280px; flex-shrink: 0; }
+    .donut { width: 280px; height: 280px; border-radius: 50%; background: conic-gradient(#a07830 0% 35%, #c4a060 35% 60%, #4a7a9a 60% 80%, #2a4060 80% 90%, #1a9950 90% 100%); }
+    .donut-hole { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 162px; height: 162px; border-radius: 50%; background: var(--navy); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .donut-hole span { font-size: 11px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+    .donut-hole strong { font-size: 22px; font-weight: 200; color: var(--brass-lt); margin-top: 4px; }
+    .graph-legend { display: flex; flex-direction: column; gap: 16px; }
+    .gl-item { display: flex; align-items: center; gap: 16px; }
+    .gl-dot { width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0; }
+    .gl-info { display: flex; flex-direction: column; gap: 2px; }
+    .gl-name { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.8); }
+    .gl-role { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+    .gl-pct { margin-left: auto; font-size: 26px; font-weight: 200; color: rgba(255,255,255,.5); min-width: 52px; text-align: right; }
 
     /* ─── REFERENCE SLIDE ─── */
     #sref { background: var(--off); }
@@ -573,7 +635,7 @@
     </div>
 
     <!-- 5 — TARGET 2/2 -->
-    <div class="slide tslide" id="s5">
+    <div class="slide tslide secondary" id="s5">
       <span class="s-label" data-en="The Target · 2 / 2">Il Target · 2 / 2</span>
       <h2 class="s-title" data-en="Who's at the <strong>helm.</strong>">Chi è al <strong>timone.</strong></h2>
       <p style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;margin-top:-8px;" data-en="Secondary profiles · Still under evaluation">Profili secondari · Ancora in valutazione</p>
@@ -645,31 +707,154 @@
       </div>
     </div>
 
+    <!-- CONTENUTI 2026 -->
+    <div class="slide" id="scontenuti">
+      <span class="s-label" data-en="Content Strategy 2026">Strategia Contenuti 2026</span>
+      <h2 class="s-title">Cinque macro <strong>aree.</strong></h2>
+      <div style="font-size:12px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--brass);margin-bottom:20px;margin-top:-4px;" data-en="From July · 2–3 posts/week · Start first week of July">Da Luglio · 2–3 post/settimana · Prima pubblicazione prima settimana di luglio</div>
+      <div class="cont-grid">
+        <div class="cont-card emotion">
+          <div class="cont-pct">35%</div>
+          <h3 data-en="Owners">Armatori</h3>
+          <p data-en="Interviews with Jesper and the owners. They speak. Stories, passion, the why behind the boat.">Interviste a Jesper e agli armatori. Parlano loro. Storie, passione, il perché dietro alla barca.</p>
+          <span class="cont-role" data-en="EMOTION">EMOZIONE</span>
+        </div>
+        <div class="cont-card emotion">
+          <div class="cont-pct">25%</div>
+          <h3 data-en="Cossutti Ganz">Cossutti Ganz</h3>
+          <p data-en="The design studio tells the story of the 355. Technical passion becomes narrative.">Lo studio progettuale racconta la 355. La passione tecnica diventa narrazione.</p>
+          <span class="cont-role" data-en="EMOTION + TECHNIQUE">EMOZIONE + TECNICA</span>
+        </div>
+        <div class="cont-card auth">
+          <div class="cont-pct">20%</div>
+          <h3 data-en="Technical Pills">Pillole Tecniche</h3>
+          <p data-en="Micro-interviews with designers. Technical data, materials, construction choices. Builds authority for emotion.">Micro-interviste ai progettisti. Dati tecnici, materiali, scelte costruttive. Dà autorevolezza all'emozione.</p>
+          <span class="cont-role" data-en="AUTHORITY">AUTOREVOLEZZA</span>
+        </div>
+        <div class="cont-card cred">
+          <div class="cont-pct">10%</div>
+          <h3 data-en="Construction">Costruzione</h3>
+          <p data-en="Archive photos and videos from the boatyard. Concrete proof. The boat being built, for real.">Foto e video d'archivio del cantiere. La prova concreta. La barca che si costruisce, davvero.</p>
+          <span class="cont-role" data-en="CREDIBILITY">CREDIBILITÀ</span>
+        </div>
+        <div class="cont-card peak">
+          <div class="cont-pct">10%</div>
+          <h3 data-en="Final Video">Video Finale</h3>
+          <p data-en="The boat in the water. The launch. The result of everything. Emotional peak of the whole story.">La barca in acqua. Il varo. Il risultato di tutto. Picco emozionale dell'intera storia.</p>
+          <span class="cont-role" data-en="EMOTIONAL PEAK">PICCO EMOZIONALE</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAFICO EMOZIONALE -->
+    <div class="slide" id="sgraph">
+      <span class="s-label lt" data-en="Emotional Strategy">Strategia Emozionale</span>
+      <h2 class="s-title">Il cuore della <strong>comunicazione.</strong></h2>
+      <div class="graph-wrap">
+        <div class="donut-wrap">
+          <div class="donut"></div>
+          <div class="donut-hole">
+            <span data-en="EMOTION">EMOZIONE</span>
+            <strong>60%</strong>
+          </div>
+        </div>
+        <div class="graph-legend">
+          <div class="gl-item">
+            <div class="gl-dot" style="background:#a07830"></div>
+            <div class="gl-info">
+              <span class="gl-name" data-en="Owners">Armatori</span>
+              <span class="gl-role" data-en="EMOTION">EMOZIONE</span>
+            </div>
+            <span class="gl-pct">35%</span>
+          </div>
+          <div class="gl-item">
+            <div class="gl-dot" style="background:#c4a060"></div>
+            <div class="gl-info">
+              <span class="gl-name">Cossutti Ganz</span>
+              <span class="gl-role" data-en="EMOTION + TECHNIQUE">EMOZIONE + TECNICA</span>
+            </div>
+            <span class="gl-pct">25%</span>
+          </div>
+          <div class="gl-item">
+            <div class="gl-dot" style="background:#4a7a9a"></div>
+            <div class="gl-info">
+              <span class="gl-name" data-en="Technical Pills">Pillole Tecniche</span>
+              <span class="gl-role" data-en="AUTHORITY">AUTOREVOLEZZA</span>
+            </div>
+            <span class="gl-pct">20%</span>
+          </div>
+          <div class="gl-item">
+            <div class="gl-dot" style="background:#2a4060"></div>
+            <div class="gl-info">
+              <span class="gl-name" data-en="Construction">Costruzione</span>
+              <span class="gl-role" data-en="CREDIBILITY">CREDIBILITÀ</span>
+            </div>
+            <span class="gl-pct">10%</span>
+          </div>
+          <div class="gl-item">
+            <div class="gl-dot" style="background:#1a9950"></div>
+            <div class="gl-info">
+              <span class="gl-name" data-en="Final Video">Video Finale</span>
+              <span class="gl-role" data-en="EMOTIONAL PEAK">PICCO EMOZIONALE</span>
+            </div>
+            <span class="gl-pct">10%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- 8 — CANALI -->
     <div class="slide" id="s8">
       <span class="s-label" data-en="The Channels">I Canali</span>
-      <h2 class="s-title" data-en="Three platforms, <strong>one single story.</strong>">Tre piattaforme, <strong>un'unica storia.</strong></h2>
+      <h2 class="s-title" data-en="Four platforms, <strong>one single story.</strong>">Quattro piattaforme, <strong>un'unica storia.</strong></h2>
       <div class="cg">
         <div class="cc main">
           <span class="cr" data-en="Main">Principale</span>
           <h3>Instagram</h3>
           <div class="cf" data-en="~1,000 current followers">~1.000 follower attuali</div>
-          <p data-en="Main visual storytelling. Renders, boatyard BTS, cinematic Reels. Heart of the Costiera 355 identity.">Visual storytelling principale. Render, BTS cantiere, Reel cinematografici. Cuore dell'identità Costiera 355.</p>
-          <div class="cfreq" data-en="From August <span>4× week</span>">Da Agosto <span>4× sett</span></div>
+          <ul data-en="<li>Visual storytelling principale</li><li>Render + BTS cantiere</li><li>Reel cinematografici</li><li>Storie e carousel tecnici</li>">
+            <li>Visual storytelling principale</li>
+            <li>Render + BTS cantiere</li>
+            <li>Reel cinematografici</li>
+            <li>Storie e carousel tecnici</li>
+          </ul>
+          <div class="cfreq" data-en="From July <span>3–4× week</span>">Da Luglio <span>3–4× sett</span></div>
         </div>
         <div class="cc">
           <span class="cr" data-en="Dynamic">Dinamismo</span>
           <h3>TikTok</h3>
           <div class="cf" data-en="~178 current followers">~178 follower attuali</div>
-          <p data-en="Raw and dynamic version. Process videos, boatyard quickcuts, vertical formats. Young and passionate community.">Versione raw e dinamica. Video di processo, quickcuts cantiere, formati verticali. Comunità giovane e appassionata.</p>
-          <div class="cfreq" data-en="From August <span>3× week</span>">Da Agosto <span>3× sett</span></div>
+          <ul data-en="<li>Video raw di processo</li><li>Quickcut cantiere</li><li>Formati verticali 9:16</li><li>Comunità giovane e appassionata</li>">
+            <li>Video raw di processo</li>
+            <li>Quickcut cantiere</li>
+            <li>Formati verticali 9:16</li>
+            <li>Comunità giovane e appassionata</li>
+          </ul>
+          <div class="cfreq" data-en="From August <span>2–3× week</span>">Da Agosto <span>2–3× sett</span></div>
         </div>
         <div class="cc">
           <span class="cr">B2B</span>
           <h3>LinkedIn</h3>
           <div class="cf" data-en="~148 current followers">~148 follower attuali</div>
-          <p data-en="Professional communication. Boatyard, partners, buyers, media. Positioning as Italian excellence in racing.">Comunicazione professionale. Cantiere, partner, buyer, media. Posizionamento come eccellenza italiana nel racing.</p>
+          <ul data-en="<li>Comunicazione professionale</li><li>Cantiere, partner, buyer, media</li><li>Articoli tecnici e fanzine</li><li>Eccellenza italiana nel racing</li>">
+            <li>Comunicazione professionale</li>
+            <li>Cantiere, partner, buyer, media</li>
+            <li>Articoli tecnici e fanzine</li>
+            <li>Eccellenza italiana nel racing</li>
+          </ul>
           <div class="cfreq" data-en="From July <span>2× week</span>">Da Luglio <span>2× sett</span></div>
+        </div>
+        <div class="cc">
+          <span class="cr" data-en="Long-form video">Video Long-form</span>
+          <h3>YouTube</h3>
+          <div class="cf" data-en="Channel to activate">Canale da attivare</div>
+          <ul data-en="<li>Interviste complete armatori</li><li>Pillole tecniche in formato esteso</li><li>Video hero del varo</li><li>Documentario costruzione</li>">
+            <li>Interviste complete armatori</li>
+            <li>Pillole tecniche in formato esteso</li>
+            <li>Video hero del varo</li>
+            <li>Documentario costruzione</li>
+          </ul>
+          <div class="cfreq" data-en="From September <span>1–2× month</span>">Da Settembre <span>1–2× mese</span></div>
         </div>
       </div>
     </div>
