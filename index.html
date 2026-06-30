@@ -240,12 +240,15 @@
     .cc .cf { font-size: 22px; font-weight: 200; color: rgba(255,255,255,.55); margin-bottom: 20px; line-height: 1.2; }
     .cc .cf small { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.25); display: block; margin-bottom: 2px; }
     .cc ul { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 5px; }
-    .cc ul li { font-size: 12px; line-height: 1.5; color: rgba(255,255,255,.4); padding-left: 14px; position: relative; }
-    .cc ul li::before { content: '—'; position: absolute; left: 0; color: rgba(255,255,255,.2); font-size: 10px; }
-    .cc .cfreq { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.08); font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.25); display: flex; justify-content: space-between; align-items: center; }
-    .cc .cfreq span { font-size: 17px; font-weight: 400; letter-spacing: 0; color: rgba(255,255,255,.7); }
+    .cc ul li { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,.55); padding-left: 16px; position: relative; }
+    .cc ul li::before { content: '—'; position: absolute; left: 0; color: rgba(255,255,255,.25); font-size: 10px; top: 1px; }
+    .cc .cfreq { display: none; }
     .cc.main .cr { color: var(--brass-lt); }
-    .sched-note { font-size: 11px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--brass); margin-bottom: 18px; margin-top: -2px; }
+    .cc-cal { margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.08); }
+    .cc-cal-label { font-size: 9px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,255,255,.25); margin-bottom: 8px; display: block; }
+    .cc-days { display: flex; gap: 3px; flex-wrap: wrap; }
+    .cc-day { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 4px 8px; color: rgba(255,255,255,.35); background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); }
+    .cc-day.on { color: #fff; background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.22); }
 
     /* ═══════════════════════════════════════
        SLIDE 9 — SHOOTING
@@ -871,7 +874,6 @@
     <div class="slide" id="s8">
       <span class="s-label" data-en="The Channels">I Canali</span>
       <h2 class="s-title" data-en="Five platforms, <strong>one single story.</strong>">Cinque piattaforme, <strong>un'unica storia.</strong></h2>
-      <p class="sched-note" data-en="First post: ~20 July 2026 · Initial frequency: 2–3 posts/week">Prima pubblicazione: ~20 Luglio 2026 · Frequenza iniziale: 2–3 post/settimana</p>
       <div class="cg">
         <div class="cc main">
           <div class="cc-bar" style="background:linear-gradient(90deg,#833ab4,#e1306c,#f77737)"></div>
@@ -883,7 +885,12 @@
             <li data-en="Cinematic Reels">Reel cinematografici</li>
             <li data-en="Stories and technical carousels">Storie e carousel tecnici</li>
           </ul>
-          <div class="cfreq" data-en="From 20 July <span>3× week</span>">Dal 20 Luglio <span>3× sett</span></div>
+          <div class="cc-cal">
+            <span class="cc-cal-label" data-en="From 20 July · 3× week">Dal 20 Luglio · 3× settimana</span>
+            <div class="cc-days">
+              <span class="cc-day on">LUN</span><span class="cc-day">MAR</span><span class="cc-day on">MER</span><span class="cc-day">GIO</span><span class="cc-day on">VEN</span><span class="cc-day">SAB</span><span class="cc-day">DOM</span>
+            </div>
+          </div>
         </div>
         <div class="cc">
           <div class="cc-bar" style="background:linear-gradient(90deg,#010101,#ff0050)"></div>
@@ -895,7 +902,12 @@
             <li data-en="Vertical format 9:16">Formati verticali 9:16</li>
             <li data-en="Young, passionate community">Community giovane e appassionata</li>
           </ul>
-          <div class="cfreq" data-en="From 20 July <span>3× week</span>">Dal 20 Luglio <span>3× sett</span></div>
+          <div class="cc-cal">
+            <span class="cc-cal-label" data-en="From 20 July · 3× week">Dal 20 Luglio · 3× settimana</span>
+            <div class="cc-days">
+              <span class="cc-day">LUN</span><span class="cc-day on">MAR</span><span class="cc-day">MER</span><span class="cc-day on">GIO</span><span class="cc-day">VEN</span><span class="cc-day on">SAB</span><span class="cc-day">DOM</span>
+            </div>
+          </div>
         </div>
         <div class="cc">
           <div class="cc-bar" style="background:#0077b5"></div>
@@ -907,19 +919,29 @@
             <li data-en="Technical articles and fanzine">Articoli tecnici e fanzine</li>
             <li data-en="Italian excellence in racing">Eccellenza italiana nel racing</li>
           </ul>
-          <div class="cfreq" data-en="From 20 July <span>3× week</span>">Dal 20 Luglio <span>3× sett</span></div>
+          <div class="cc-cal">
+            <span class="cc-cal-label" data-en="From 20 July · 3× week">Dal 20 Luglio · 3× settimana</span>
+            <div class="cc-days">
+              <span class="cc-day on">LUN</span><span class="cc-day">MAR</span><span class="cc-day on">MER</span><span class="cc-day">GIO</span><span class="cc-day on">VEN</span><span class="cc-day">SAB</span><span class="cc-day">DOM</span>
+            </div>
+          </div>
         </div>
         <div class="cc">
           <div class="cc-bar" style="background:#ff0000"></div>
-          <span class="cr" data-en="Long-form video · Existing">Video Long-form · Esistente</span>
+          <span class="cr" data-en="Long-form · Existing">Long-form · Esistente</span>
           <h3>YouTube</h3>
-          <div class="cf"><small data-en="Subscribers · Videos">Iscritti · Video</small>11 · 25 video</div>
+          <div class="cf"><small data-en="Subscribers · Videos">Iscritti · Video caricati</small>11 · 25</div>
           <ul>
             <li data-en="Full owner interviews">Interviste complete armatori</li>
-            <li data-en="Technical pills — extended format">Pillole tecniche in formato esteso</li>
+            <li data-en="Technical pills — extended">Pillole tecniche in formato esteso</li>
             <li data-en="Hero launch video · Construction doc">Video hero varo · Doc costruzione</li>
           </ul>
-          <div class="cfreq" data-en="From 20 July <span>3× week</span>">Dal 20 Luglio <span>3× sett</span></div>
+          <div class="cc-cal">
+            <span class="cc-cal-label" data-en="From 20 July · 1× week">Dal 20 Luglio · 1× settimana</span>
+            <div class="cc-days">
+              <span class="cc-day">LUN</span><span class="cc-day">MAR</span><span class="cc-day on">MER</span><span class="cc-day">GIO</span><span class="cc-day">VEN</span><span class="cc-day">SAB</span><span class="cc-day">DOM</span>
+            </div>
+          </div>
         </div>
         <div class="cc">
           <div class="cc-bar" style="background:#1877f2"></div>
@@ -929,9 +951,14 @@
           <ul>
             <li data-en="Community of sailing enthusiasts">Community appassionati vela</li>
             <li data-en="Share regattas and events">Condivisione regate ed eventi</li>
-            <li data-en="Reach older target · B2B events">Reach target senior · eventi B2B</li>
+            <li data-en="Reach older target · B2B">Reach target senior · B2B</li>
           </ul>
-          <div class="cfreq" data-en="From 20 July <span>3× week</span>">Dal 20 Luglio <span>3× sett</span></div>
+          <div class="cc-cal">
+            <span class="cc-cal-label" data-en="From 20 July · 3× week">Dal 20 Luglio · 3× settimana</span>
+            <div class="cc-days">
+              <span class="cc-day">LUN</span><span class="cc-day on">MAR</span><span class="cc-day">MER</span><span class="cc-day on">GIO</span><span class="cc-day">VEN</span><span class="cc-day on">SAB</span><span class="cc-day">DOM</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
