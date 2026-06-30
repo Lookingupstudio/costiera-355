@@ -413,20 +413,21 @@
     /* ─── EMOTIONAL GRAPH ─── */
     #sgraph { background: var(--navy); align-items: center; justify-content: center; }
     #sgraph .s-label { color: var(--brass-lt); }
-    #sgraph .s-title { color: #fff; margin-bottom: 48px; }
-    .graph-wrap { display: flex; gap: 72px; align-items: center; }
-    .donut-wrap { position: relative; width: 280px; height: 280px; flex-shrink: 0; }
-    .donut { width: 280px; height: 280px; border-radius: 50%; background: conic-gradient(#a07830 0% 35%, #c4a060 35% 60%, #4a7a9a 60% 80%, #2a4060 80% 90%, #1a9950 90% 100%); }
-    .donut-hole { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 162px; height: 162px; border-radius: 50%; background: var(--navy); display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .donut-hole span { font-size: 11px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.3); }
-    .donut-hole strong { font-size: 22px; font-weight: 200; color: var(--brass-lt); margin-top: 4px; }
-    .graph-legend { display: flex; flex-direction: column; gap: 16px; }
-    .gl-item { display: flex; align-items: center; gap: 16px; }
-    .gl-dot { width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0; }
-    .gl-info { display: flex; flex-direction: column; gap: 2px; }
-    .gl-name { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.8); }
-    .gl-role { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.3); }
-    .gl-pct { margin-left: auto; font-size: 26px; font-weight: 200; color: rgba(255,255,255,.5); min-width: 52px; text-align: right; }
+    #sgraph .s-title { color: #fff; margin-bottom: 44px; }
+    .graph-wrap { display: flex; gap: 88px; align-items: center; }
+    .donut-wrap { position: relative; width: 360px; height: 360px; flex-shrink: 0; }
+    .donut { width: 360px; height: 360px; border-radius: 50%; background: conic-gradient(#b83228 0% 35%, #d45a50 35% 60%, #4a7a9a 60% 80%, #2a4060 80% 90%, #1a9950 90% 100%); }
+    .donut-hole { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 210px; height: 210px; border-radius: 50%; background: var(--navy); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .donut-hole span { font-size: 12px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+    .donut-hole strong { font-size: 38px; font-weight: 200; color: var(--brass-lt); margin-top: 4px; }
+    .graph-legend { display: flex; flex-direction: column; gap: 22px; flex: 1; }
+    .gl-item { display: flex; align-items: center; gap: 20px; padding: 14px 20px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); transition: background .2s; }
+    .gl-item:hover { background: rgba(255,255,255,.08); }
+    .gl-dot { width: 18px; height: 18px; border-radius: 3px; flex-shrink: 0; }
+    .gl-info { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+    .gl-name { font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: rgba(255,255,255,.85); }
+    .gl-role { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+    .gl-pct { font-size: 38px; font-weight: 200; color: rgba(255,255,255,.45); min-width: 70px; text-align: right; }
 
     /* ─── REFERENCE SLIDE ─── */
     #sref { background: var(--off); }
@@ -803,6 +804,63 @@
       </div>
     </div>
 
+    <!-- GRAFICO EMOZIONALE -->
+    <div class="slide" id="sgraph">
+      <span class="s-label lt" data-en="Emotional Strategy">Strategia Emozionale</span>
+      <h2 class="s-title">Il cuore della <strong>comunicazione.</strong></h2>
+      <div class="graph-wrap">
+        <div class="donut-wrap">
+          <div class="donut"></div>
+          <div class="donut-hole">
+            <span data-en="EMOTION">EMOZIONE</span>
+            <strong>60%</strong>
+          </div>
+        </div>
+        <div class="graph-legend">
+          <div class="gl-item">
+            <div class="gl-dot" style="background:#b83228"></div>
+            <div class="gl-info">
+              <span class="gl-name" data-en="Owners — Jesper">Armatori — Jesper</span>
+              <span class="gl-role" data-en="EMOTION">EMOZIONE</span>
+            </div>
+            <span class="gl-pct">35%</span>
+          </div>
+          <div class="gl-item">
+            <div class="gl-dot" style="background:#d45a50"></div>
+            <div class="gl-info">
+              <span class="gl-name">Cossutti Ganz</span>
+              <span class="gl-role" data-en="EMOTION + TECHNIQUE">EMOZIONE + TECNICA</span>
+            </div>
+            <span class="gl-pct">25%</span>
+          </div>
+          <div class="gl-item">
+            <div class="gl-dot" style="background:#4a7a9a"></div>
+            <div class="gl-info">
+              <span class="gl-name" data-en="Technical Pills">Pillole Tecniche</span>
+              <span class="gl-role" data-en="AUTHORITY">AUTOREVOLEZZA</span>
+            </div>
+            <span class="gl-pct">20%</span>
+          </div>
+          <div class="gl-item">
+            <div class="gl-dot" style="background:#2a4060"></div>
+            <div class="gl-info">
+              <span class="gl-name" data-en="Construction">Costruzione</span>
+              <span class="gl-role" data-en="CREDIBILITY">CREDIBILITÀ</span>
+            </div>
+            <span class="gl-pct">10%</span>
+          </div>
+          <div class="gl-item">
+            <div class="gl-dot" style="background:#1a9950"></div>
+            <div class="gl-info">
+              <span class="gl-name" data-en="Final Video · Launch">Video Finale · Varo</span>
+              <span class="gl-role" data-en="EMOTIONAL PEAK">PICCO EMOZIONALE</span>
+            </div>
+            <span class="gl-pct">10%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- CONTENUTI 2026 -->
     <div class="slide" id="scontenuti">
       <span class="s-label lt" data-en="Content Strategy 2026">Strategia Contenuti 2026</span>
@@ -861,63 +919,6 @@
             <li data-en="November 2026">Novembre 2026</li>
           </ul>
           <span class="cont-role" data-en="EMOTIONAL PEAK">PICCO EMOZIONALE</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- GRAFICO EMOZIONALE -->
-    <div class="slide" id="sgraph">
-      <span class="s-label lt" data-en="Emotional Strategy">Strategia Emozionale</span>
-      <h2 class="s-title">Il cuore della <strong>comunicazione.</strong></h2>
-      <div class="graph-wrap">
-        <div class="donut-wrap">
-          <div class="donut"></div>
-          <div class="donut-hole">
-            <span data-en="EMOTION">EMOZIONE</span>
-            <strong>60%</strong>
-          </div>
-        </div>
-        <div class="graph-legend">
-          <div class="gl-item">
-            <div class="gl-dot" style="background:#a07830"></div>
-            <div class="gl-info">
-              <span class="gl-name" data-en="Owners">Armatori</span>
-              <span class="gl-role" data-en="EMOTION">EMOZIONE</span>
-            </div>
-            <span class="gl-pct">35%</span>
-          </div>
-          <div class="gl-item">
-            <div class="gl-dot" style="background:#c4a060"></div>
-            <div class="gl-info">
-              <span class="gl-name">Cossutti Ganz</span>
-              <span class="gl-role" data-en="EMOTION + TECHNIQUE">EMOZIONE + TECNICA</span>
-            </div>
-            <span class="gl-pct">25%</span>
-          </div>
-          <div class="gl-item">
-            <div class="gl-dot" style="background:#4a7a9a"></div>
-            <div class="gl-info">
-              <span class="gl-name" data-en="Technical Pills">Pillole Tecniche</span>
-              <span class="gl-role" data-en="AUTHORITY">AUTOREVOLEZZA</span>
-            </div>
-            <span class="gl-pct">20%</span>
-          </div>
-          <div class="gl-item">
-            <div class="gl-dot" style="background:#2a4060"></div>
-            <div class="gl-info">
-              <span class="gl-name" data-en="Construction">Costruzione</span>
-              <span class="gl-role" data-en="CREDIBILITY">CREDIBILITÀ</span>
-            </div>
-            <span class="gl-pct">10%</span>
-          </div>
-          <div class="gl-item">
-            <div class="gl-dot" style="background:#1a9950"></div>
-            <div class="gl-info">
-              <span class="gl-name" data-en="Final Video">Video Finale</span>
-              <span class="gl-role" data-en="EMOTIONAL PEAK">PICCO EMOZIONALE</span>
-            </div>
-            <span class="gl-pct">10%</span>
-          </div>
         </div>
       </div>
     </div>
