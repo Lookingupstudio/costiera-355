@@ -437,24 +437,26 @@
     .gl-role { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.3); }
     .gl-pct { font-size: 38px; font-weight: 200; color: rgba(255,255,255,.45); min-width: 70px; text-align: right; }
 
-    /* ─── REFERENCE SLIDE ─── */
-    #sref { background: var(--off); }
-    .ref-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 40px; flex: 1; }
-    .ref-card { background: var(--white); border: 1px solid rgba(160,120,48,.08); padding: 36px 32px; display: flex; flex-direction: column; transition: border-color .3s; }
-    .ref-card:hover { border-color: rgba(160,120,48,.3); }
-    .ref-card.our { border-top: 4px solid var(--brass); }
-    .ref-n { font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--brass); margin-bottom: 12px; display: block; }
-    .ref-card h3 { font-size: 26px; font-weight: 200; color: var(--navy); margin-bottom: 4px; letter-spacing: .02em; }
-    .ref-card h3 strong { font-weight: 700; }
-    .ref-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
-    .ref-rows { display: flex; flex-direction: column; gap: 10px; flex: 1; }
-    .ref-row dt { font-size: 10px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); }
-    .ref-row dd { font-size: 14px; color: var(--text); margin-top: 2px; line-height: 1.5; }
-    .ref-tag { margin-top: 24px; display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--white); background: var(--brass); padding: 7px 16px; }
-    .ref-tag.dk { background: var(--navy); }
-    .ref-note { font-size: 13px; font-style: italic; color: rgba(160,120,48,.8); margin-top: 14px; border-top: 1px solid rgba(160,120,48,.12); padding-top: 14px; line-height: 1.6; }
-    .ref-comm { background: var(--navy); padding: 20px 32px; margin-top: 2px; font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.75; }
-    .ref-comm strong { color: rgba(255,255,255,.75); }
+    /* ─── REFERENCE / POSIZIONAMENTO ─── */
+    #sref { background: var(--navy); }
+    #sref .s-label { color: var(--brass-lt); }
+    #sref .s-title { color: #fff; margin-bottom: 20px; }
+    .pos-wrap { flex: 1; display: grid; grid-template-columns: 28px 1fr; grid-template-rows: 1fr 28px; }
+    .pos-y-axis { grid-row: 1; grid-column: 1; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
+    .pos-y-axis span { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.22); writing-mode: vertical-rl; transform: rotate(180deg); }
+    .pos-x-axis { grid-row: 2; grid-column: 2; display: flex; justify-content: space-between; padding-top: 8px; }
+    .pos-x-axis span { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.22); }
+    .pos-matrix { grid-row: 1; grid-column: 2; position: relative; border: 1px solid rgba(255,255,255,.07); }
+    .pos-matrix::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: rgba(255,255,255,.06); pointer-events: none; }
+    .pos-matrix::after { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,.06); pointer-events: none; }
+    .pos-dot { position: absolute; transform: translate(-50%,-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .pos-dot .pd-circle { border-radius: 50%; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.07); transition: transform .3s; }
+    .pos-dot:hover .pd-circle { transform: scale(1.15); }
+    .pos-dot .pd-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.5); white-space: nowrap; text-align: center; }
+    .pos-dot .pd-sub { font-size: 9px; color: rgba(255,255,255,.2); text-transform: uppercase; letter-spacing: .08em; white-space: nowrap; margin-top: -4px; }
+    .pos-dot.hero .pd-circle { background: var(--brass); border-color: var(--brass-lt); box-shadow: 0 0 32px rgba(160,120,48,.5); }
+    .pos-dot.hero .pd-label { color: var(--brass-lt); font-size: 14px; }
+    .pos-dot.hero .pd-sub { color: rgba(160,120,48,.6); }
 
     /* ─── ORIZZONTE SLIDE ─── */
     #sorizzonte { background: var(--navy); }
@@ -1021,48 +1023,51 @@
       <div class="prnote" data-en="To be defined: coordinated launch date for simultaneous release on social + press + Google Maps.">Da definire: data lancio coordinata per uscita simultanea su social + giornali + Google Maps.</div>
     </div>
 
-    <!-- REFERENCE COMPETITOR -->
+    <!-- REFERENCE / MAPPA POSIZIONAMENTO -->
     <div class="slide" id="sref">
-      <span class="s-label" data-en="The Market · Reference">Il Mercato · Reference</span>
-      <h2 class="s-title" data-en="Who's competing for <strong>the same client.</strong>">Chi si gioca <strong>lo stesso cliente.</strong></h2>
-      <div class="ref-grid">
-        <div class="ref-card">
-          <span class="ref-n">MAT 11</span>
-          <h3>MAT <strong>11</strong></h3>
-          <div class="ref-sub">Matteo Polli Design · Racer/Cruiser</div>
-          <div class="ref-rows">
-            <div class="ref-row"><dt data-en="Positioning">Posizionamento</dt><dd data-en="Premium racer-cruiser, Italian designer brand">Racer-cruiser premium, design firma italiana</dd></div>
-            <div class="ref-row"><dt>Target</dt><dd data-en="ORC + owners with high budget">ORC + armatori con budget alto</dd></div>
-            <div class="ref-row"><dt data-en="Communication">Comunicazione</dt><dd data-en="YouTube videos, dynamic Shorts, Giornale della Vela, ORC Worlds 2026">Video YouTube, Shorts dinamici, Giornale della Vela, Mondiale ORC 2026</dd></div>
-            <div class="ref-row"><dt data-en="Weaknesses">Punti deboli</dt><dd data-en="Less specialised in double-handed">Meno specializzato sul double handed</dd></div>
-          </div>
-          <span class="ref-tag dk" data-en="Series production">Produzione in serie</span>
+      <span class="s-label lt" data-en="Market Positioning">Posizionamento di Mercato</span>
+      <h2 class="s-title" data-en="Where <strong>Costiera 355</strong> stands.">Dove sta <strong>Costiera 355.</strong></h2>
+      <div class="pos-wrap">
+        <div class="pos-y-axis">
+          <span data-en="Pure Racing">Racing Puro</span>
+          <span data-en="Cruising">Crociera</span>
         </div>
-        <div class="ref-card">
-          <span class="ref-n">Italy Yachts · IY 9.98</span>
-          <h3>IY <strong>9.98</strong></h3>
-          <div class="ref-sub" data-en="Linea Bellissima · Dual purpose">Linea Bellissima · Dual purpose</div>
-          <div class="ref-rows">
-            <div class="ref-row"><dt data-en="Positioning">Posizionamento</dt><dd data-en="Performance cruiser with racing soul">Performance cruiser con anima racing</dd></div>
-            <div class="ref-row"><dt>Target</dt><dd data-en="Families + club racers, fast cruising">Famiglie + club racer, crociera veloce</dd></div>
-            <div class="ref-row"><dt data-en="Communication">Comunicazione</dt><dd data-en="Well-crafted website, clean visual identity">Sito curato, identità visiva pulita</dd></div>
-            <div class="ref-row"><dt data-en="Weaknesses">Punti deboli</dt><dd data-en="Less pure racing, cruising compromise">Meno puro racing, compromesso crociera</dd></div>
+        <div class="pos-matrix">
+          <!-- IY 9.98: serie, racer-cruiser (mezzo) -->
+          <div class="pos-dot" style="left:18%;top:55%;">
+            <div class="pd-circle" style="width:36px;height:36px;"></div>
+            <div class="pd-label">IY 9.98</div>
+            <div class="pd-sub" data-en="Series · Racer-Cruiser">Serie · Racer-Cruiser</div>
           </div>
-          <span class="ref-tag dk" data-en="Series production">Produzione in serie</span>
+          <!-- First 36 SE: serie ma racing -->
+          <div class="pos-dot" style="left:30%;top:22%;">
+            <div class="pd-circle" style="width:40px;height:40px;"></div>
+            <div class="pd-label">First 36 SE</div>
+            <div class="pd-sub" data-en="Series · ORC Racing">Serie · ORC Racing</div>
+          </div>
+          <!-- MAT 11: produzione premium, racing puro -->
+          <div class="pos-dot" style="left:44%;top:14%;">
+            <div class="pd-circle" style="width:44px;height:44px;"></div>
+            <div class="pd-label">MAT 11</div>
+            <div class="pd-sub" data-en="Premium Series · Pure Racing">Serie Premium · Racing Puro</div>
+          </div>
+          <!-- Costiera 355: custom, racing puro — in alto a destra -->
+          <div class="pos-dot hero" style="left:78%;top:10%;">
+            <div class="pd-circle" style="width:56px;height:56px;"></div>
+            <div class="pd-label">Costiera 355</div>
+            <div class="pd-sub" data-en="Custom · Pure Racing">Custom · Racing Puro</div>
+          </div>
+          <!-- quadrant labels -->
+          <div style="position:absolute;top:8px;left:8px;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.1);" data-en="Series + Racing">Serie + Racing</div>
+          <div style="position:absolute;top:8px;right:8px;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(160,120,48,.2);text-align:right;" data-en="Custom + Racing">Custom + Racing</div>
+          <div style="position:absolute;bottom:8px;left:8px;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.1);" data-en="Series + Cruising">Serie + Crociera</div>
+          <div style="position:absolute;bottom:8px;right:8px;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.1);text-align:right;" data-en="Custom + Cruising">Custom + Crociera</div>
         </div>
-        <div class="ref-card our">
-          <span class="ref-n">Beneteau First 36 SE · Cossutti Ganz</span>
-          <h3>First <strong>36 SE</strong></h3>
-          <div class="ref-sub" data-en="Beneteau × Cossutti Ganz · ORC Planing Racer">Beneteau × Cossutti Ganz · ORC Racer planante</div>
-          <div class="ref-rows">
-            <div class="ref-row"><dt data-en="Why it matters">Perché ci interessa</dt><dd data-en="<strong>Same designers</strong> as the Costiera 355. Their launch is our reference."><strong>Stessi progettisti</strong> della Costiera 355. Il loro lancio è il nostro riferimento.</dd></div>
-            <div class="ref-row"><dt data-en="Their communication">La loro comunicazione</dt><dd data-en="Hero videos, international press, coordinated social + press launch">Video hero, stampa internazionale, lancio coordinato social + press</dd></div>
-            <div class="ref-row"><dt data-en="Our advantage">Il nostro vantaggio</dt><dd data-en="Custom commission + artisan boatyard story — something they can't tell">Custom su commissione + storia del cantiere artigianale — loro non possono raccontarlo</dd></div>
-          </div>
-          <span class="ref-tag" data-en="Communication benchmark">Benchmark comunicazione</span>
+        <div class="pos-x-axis">
+          <span data-en="Series production">Produzione in serie</span>
+          <span data-en="Custom · Artisan">Custom · Artigianale</span>
         </div>
       </div>
-      <div class="ref-comm" data-en="Social to monitor: <strong>@matsailingyachts</strong> · <strong>@beneteau_first</strong> · <strong>@orcsailing</strong> · <strong>@ferrarihypersail</strong> (luxury benchmark)">Social da monitorare: <strong>@matsailingyachts</strong> · <strong>@beneteau_first</strong> · <strong>@orcsailing</strong> · <strong>@ferrarihypersail</strong> (benchmark luxury)</div>
     </div>
 
     <!-- PASSI -->
