@@ -136,18 +136,24 @@
     /* ═══════════════════════════════════════
        SLIDE 2 — CONTESTO
     ═══════════════════════════════════════ */
-    #s2 { background: var(--white); }
-    #s2 .grid { display: grid; grid-template-columns: 1fr 72px 1fr; align-items: center; margin-top: 44px; flex: 1; }
-    .sbox { padding: 44px 48px; border: 1px solid rgba(160,120,48,.12); background: var(--off); display: flex; flex-direction: column; justify-content: center; height: 100%; }
-    .sbox.on { border-color: rgba(160,120,48,.4); background: var(--white); }
-    .sbox .sb-tag { font-size: 12px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; display: block; }
-    .sbox.on .sb-tag { color: var(--brass); }
-    .sbox h3 { font-size: 26px; font-weight: 700; color: var(--navy); letter-spacing: .04em; margin-bottom: 20px; text-transform: uppercase; }
-    .sbox p { font-size: 16px; line-height: 1.85; color: var(--muted); }
-    .sbox p + p { margin-top: 12px; }
-    .sbox .tags { margin-top: 24px; }
-    .sbox .tags span { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; border: 1px solid rgba(160,120,48,.3); color: var(--brass); padding: 6px 14px; margin: 4px 4px 0 0; }
-    .sarrow { display: flex; align-items: center; justify-content: center; color: rgba(160,120,48,.4); font-size: 28px; }
+    #s2 { background: var(--navy); }
+    #s2 .s-label { color: var(--brass-lt); }
+    #s2 .s-title { color: #fff; }
+    #s2 .s-title strong { color: #fff; }
+    #s2 .grid { display: grid; grid-template-columns: 1fr 40px 1fr; align-items: stretch; margin-top: 32px; flex: 1; gap: 0; }
+    .sbox { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; padding: 32px 36px; }
+    .sbox-img { position: absolute; inset: 0; background-size: cover; background-position: center; }
+    .sbox-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(8,18,32,.75) 0%, rgba(8,18,32,.3) 50%, rgba(8,18,32,.7) 100%); }
+    .sbox-overlay.on { background: linear-gradient(to bottom, rgba(8,18,32,.6) 0%, rgba(8,18,32,.15) 50%, rgba(8,18,32,.65) 100%); }
+    .sbox-top { position: relative; z-index: 2; }
+    .sbox-bottom { position: relative; z-index: 2; }
+    .sbox .sb-tag { font-size: 11px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 10px; display: block; }
+    .sbox.on .sb-tag { color: var(--brass-lt); }
+    .sbox h3 { font-size: clamp(28px, 3.5vw, 44px); font-weight: 200; color: #fff; letter-spacing: .03em; text-transform: uppercase; }
+    .sbox.on h3 { font-weight: 700; }
+    .sbox .tags { }
+    .sbox .tags span { display: inline-block; font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; border: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.7); padding: 5px 12px; margin: 3px 3px 0 0; }
+    .sarrow { display: flex; align-items: center; justify-content: center; color: rgba(160,120,48,.5); font-size: 22px; font-weight: 300; z-index: 2; }
 
     /* ═══════════════════════════════════════
        SLIDE 3 — CONCEPT
@@ -543,21 +549,30 @@
       <h2 class="s-title" data-en="Where we come from.<br><strong>Where we're going.</strong>">Da dove veniamo.<br><strong>Dove andiamo.</strong></h2>
       <div class="grid">
         <div class="sbox">
-          <span class="sb-tag" data-en="Before — CY39">Prima — CY39</span>
-          <h3 data-en="Motor Yacht">Yacht a Motore</h3>
-          <p data-en="A boat of our own to sell on the American market. Luxury, elevated, aspirational communication.">Una barca propria da vendere sul mercato americano. Comunicazione luxury, elevata, aspirazionale.</p>
+          <div class="sbox-img" style="background-image: url('images/hero.jpg');"></div>
+          <div class="sbox-overlay"></div>
+          <div class="sbox-top">
+            <span class="sb-tag" data-en="Before — CY39">Prima — CY39</span>
+            <h3 data-en="Motor Yacht">Yacht a Motore</h3>
+          </div>
+          <div class="sbox-bottom"></div>
         </div>
         <div class="sarrow">+</div>
         <div class="sbox on">
-          <span class="sb-tag" data-en="Now — Costiera 355">Ora — Costiera 355</span>
-          <h3 data-en="Racing Sailboat">Barca a Vela Racing</h3>
-          <p data-en="Custom build for a private client. Sporty, technical, emotional communication.">Costruzione su commissione per un cliente privato. Comunicazione sportiva, tecnica, emozionale.</p>
-          <div class="tags">
-            <span>ORC Class</span>
-            <span>Infusione</span>
-            <span>Carbonio</span>
-            <span>Double Handed</span>
-            <span>Cossutti Ganz</span>
+          <div class="sbox-img" style="background-image: url('images/gen-hero-vela.png'); background-position: center 30%;"></div>
+          <div class="sbox-overlay on"></div>
+          <div class="sbox-top">
+            <span class="sb-tag" data-en="Now — Costiera 355">Ora — Costiera 355</span>
+            <h3 data-en="Racing Sailboat">Barca a Vela Racing</h3>
+          </div>
+          <div class="sbox-bottom">
+            <div class="tags">
+              <span>ORC Class</span>
+              <span>Infusione</span>
+              <span>Carbonio</span>
+              <span>Double Handed</span>
+              <span>Cossutti Ganz</span>
+            </div>
           </div>
         </div>
       </div>
