@@ -228,19 +228,24 @@
        SLIDE 8 — CANALI
     ═══════════════════════════════════════ */
     #s8 { background: var(--off); }
-    .cg { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; margin-top: 40px; flex: 1; }
-    .cc { padding: 32px 28px; background: var(--white); border: 1px solid rgba(160,120,48,.08); transition: border-color .3s; display: flex; flex-direction: column; }
-    .cc.main { border-top: 4px solid var(--brass); }
-    .cc:hover { border-color: rgba(160,120,48,.3); }
-    .cc .cr { font-size: 11px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--brass); margin-bottom: 10px; display: block; }
-    .cc h3 { font-size: 28px; font-weight: 200; color: var(--navy); margin-bottom: 4px; }
-    .cc .cf { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
-    .cc ul { list-style: none; flex: 1; }
-    .cc ul li { font-size: 13px; line-height: 1.6; color: var(--muted); padding: 6px 0 6px 14px; border-bottom: 1px solid rgba(160,120,48,.06); position: relative; }
-    .cc ul li:last-child { border-bottom: none; }
-    .cc ul li::before { content: '—'; position: absolute; left: 0; color: rgba(160,120,48,.4); font-size: 10px; top: 8px; }
-    .cc .cfreq { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(160,120,48,.12); font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
-    .cc .cfreq span { font-size: 16px; font-weight: 400; letter-spacing: 0; color: var(--navy); }
+    #s8 { background: #080e1a; }
+    #s8 .s-label { color: var(--brass-lt); }
+    #s8 .s-title { color: #fff; }
+    .cg { display: grid; grid-template-columns: repeat(5,1fr); gap: 3px; margin-top: 10px; flex: 1; }
+    .cc { padding: 28px 22px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); display: flex; flex-direction: column; position: relative; overflow: hidden; transition: background .3s; }
+    .cc:hover { background: rgba(255,255,255,.08); }
+    .cc-bar { position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+    .cc .cr { font-size: 10px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 14px; display: block; }
+    .cc h3 { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 6px; letter-spacing: .01em; }
+    .cc .cf { font-size: 22px; font-weight: 200; color: rgba(255,255,255,.55); margin-bottom: 20px; line-height: 1.2; }
+    .cc .cf small { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.25); display: block; margin-bottom: 2px; }
+    .cc ul { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 5px; }
+    .cc ul li { font-size: 12px; line-height: 1.5; color: rgba(255,255,255,.4); padding-left: 14px; position: relative; }
+    .cc ul li::before { content: '—'; position: absolute; left: 0; color: rgba(255,255,255,.2); font-size: 10px; }
+    .cc .cfreq { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.08); font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.25); display: flex; justify-content: space-between; align-items: center; }
+    .cc .cfreq span { font-size: 17px; font-weight: 400; letter-spacing: 0; color: rgba(255,255,255,.7); }
+    .cc.main .cr { color: var(--brass-lt); }
+    .sched-note { font-size: 11px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--brass); margin-bottom: 18px; margin-top: -2px; }
 
     /* ═══════════════════════════════════════
        SLIDE 9 — SHOOTING
@@ -861,120 +866,72 @@
       </div>
     </div>
 
-    <!-- CONTENUTI 2026 -->
-    <div class="slide" id="scontenuti">
-      <span class="s-label lt" data-en="Content Strategy 2026">Strategia Contenuti 2026</span>
-      <h2 class="s-title">Cinque macro <strong>aree.</strong></h2>
-      <div class="cont-grid">
-        <div class="cont-card emotion">
-          <div class="cont-pct">35%</div>
-          <h3 data-en="Owners — Jesper">Armatori — Jesper</h3>
-          <ul>
-            <li data-en="Jesper speaks: his story, his passion, the boat">Jesper parla: la sua storia, la sua passione, la barca</li>
-            <li data-en="Long-form video interviews">Interviste video in formato lungo</li>
-            <li data-en="Emotional: why this boat, why now">Emotivo: perché questa barca, perché ora</li>
-            <li data-en="Highest emotional impact of all formats">Massimo impatto emozionale di tutti i formati</li>
-          </ul>
-          <span class="cont-role" data-en="EMOTION">EMOZIONE</span>
-        </div>
-        <div class="cont-card emotion">
-          <div class="cont-pct">25%</div>
-          <h3>Cossutti Ganz</h3>
-          <ul>
-            <li data-en="Leading European racing design studio">Studio progettuale tra i più autorevoli nel racing europeo</li>
-            <li data-en="Authors of the Beneteau First 36 SE">Autori del Beneteau First 36 SE</li>
-            <li data-en="Interviews on the design of the 355">Interviste sulla progettazione della 355</li>
-            <li data-en="Technical passion becomes story">La passione tecnica diventa narrazione</li>
-          </ul>
-          <span class="cont-role" data-en="EMOTION + TECHNIQUE">EMOZIONE + TECNICA</span>
-        </div>
-        <div class="cont-card auth">
-          <div class="cont-pct">20%</div>
-          <h3 data-en="Technical Pills">Pillole Tecniche</h3>
-          <ul>
-            <li data-en="Micro-interviews with designers">Micro-interviste ai progettisti</li>
-            <li data-en="Materials: infusion, carbon, composite keel">Materiali: infusione, carbonio, deriva composita</li>
-            <li data-en="ORC rating and construction choices">Rating ORC e scelte costruttive</li>
-            <li data-en="Builds authority — trust in the brand">Crea autorevolezza — fiducia nel brand</li>
-          </ul>
-          <span class="cont-role" data-en="AUTHORITY">AUTOREVOLEZZA</span>
-        </div>
-        <div class="cont-card cred">
-          <div class="cont-pct">10%</div>
-          <h3 data-en="Construction">Costruzione</h3>
-          <ul>
-            <li data-en="Videos from the boatyard — work in progress">Video dal cantiere — lavori in corso</li>
-            <li data-en="Archive photos and construction steps">Foto d'archivio e fasi costruttive</li>
-            <li data-en="Concrete proof: the boat is being built">Prova concreta: la barca si costruisce davvero</li>
-          </ul>
-          <span class="cont-role" data-en="CREDIBILITY">CREDIBILITÀ</span>
-        </div>
-        <div class="cont-card peak">
-          <div class="cont-pct">10%</div>
-          <h3 data-en="Final Video · Launch">Video Finale · Varo</h3>
-          <ul>
-            <li data-en="Boat in water · The launch">Barca in acqua · Il varo</li>
-            <li data-en="Hero video — launch release">Video hero — uscita di lancio</li>
-            <li data-en="Emotional peak of the whole story">Picco emozionale dell'intera storia</li>
-            <li data-en="November 2026">Novembre 2026</li>
-          </ul>
-          <span class="cont-role" data-en="EMOTIONAL PEAK">PICCO EMOZIONALE</span>
-        </div>
-      </div>
-    </div>
 
     <!-- 8 — CANALI -->
     <div class="slide" id="s8">
       <span class="s-label" data-en="The Channels">I Canali</span>
-      <h2 class="s-title" data-en="Four platforms, <strong>one single story.</strong>">Quattro piattaforme, <strong>un'unica storia.</strong></h2>
+      <h2 class="s-title" data-en="Five platforms, <strong>one single story.</strong>">Cinque piattaforme, <strong>un'unica storia.</strong></h2>
+      <p class="sched-note" data-en="First post: ~20 July 2026 · Initial frequency: 2–3 posts/week">Prima pubblicazione: ~20 Luglio 2026 · Frequenza iniziale: 2–3 post/settimana</p>
       <div class="cg">
         <div class="cc main">
-          <span class="cr" data-en="Main">Principale</span>
+          <div class="cc-bar" style="background:linear-gradient(90deg,#833ab4,#e1306c,#f77737)"></div>
+          <span class="cr" data-en="Main · Visual">Principale · Visual</span>
           <h3>Instagram</h3>
-          <div class="cf" data-en="~1,000 current followers">~1.000 follower attuali</div>
-          <ul data-en="<li>Visual storytelling principale</li><li>Render + BTS cantiere</li><li>Reel cinematografici</li><li>Storie e carousel tecnici</li>">
-            <li>Visual storytelling principale</li>
-            <li>Render + BTS cantiere</li>
-            <li>Reel cinematografici</li>
-            <li>Storie e carousel tecnici</li>
+          <div class="cf"><small data-en="Current followers">Follower attuali</small>~1.000</div>
+          <ul>
+            <li data-en="Visual storytelling · Renders + BTS">Visual storytelling · Render + BTS</li>
+            <li data-en="Cinematic Reels">Reel cinematografici</li>
+            <li data-en="Stories and technical carousels">Storie e carousel tecnici</li>
           </ul>
-          <div class="cfreq" data-en="From July <span>3–4× week</span>">Da Luglio <span>3–4× sett</span></div>
+          <div class="cfreq" data-en="From 20 July <span>3–4× week</span>">Da 20 Luglio <span>3–4× sett</span></div>
         </div>
         <div class="cc">
-          <span class="cr" data-en="Dynamic">Dinamismo</span>
+          <div class="cc-bar" style="background:linear-gradient(90deg,#010101,#ff0050)"></div>
+          <span class="cr" data-en="Dynamic · Raw">Dinamismo · Raw</span>
           <h3>TikTok</h3>
-          <div class="cf" data-en="~178 current followers">~178 follower attuali</div>
-          <ul data-en="<li>Video raw di processo</li><li>Quickcut cantiere</li><li>Formati verticali 9:16</li><li>Comunità giovane e appassionata</li>">
-            <li>Video raw di processo</li>
-            <li>Quickcut cantiere</li>
-            <li>Formati verticali 9:16</li>
-            <li>Comunità giovane e appassionata</li>
+          <div class="cf"><small data-en="Current followers">Follower attuali</small>~178</div>
+          <ul>
+            <li data-en="Raw process videos · Quickcuts">Video raw di processo · Quickcut</li>
+            <li data-en="Vertical format 9:16">Formati verticali 9:16</li>
+            <li data-en="Young, passionate community">Community giovane e appassionata</li>
           </ul>
           <div class="cfreq" data-en="From August <span>2–3× week</span>">Da Agosto <span>2–3× sett</span></div>
         </div>
         <div class="cc">
+          <div class="cc-bar" style="background:#0077b5"></div>
           <span class="cr">B2B</span>
           <h3>LinkedIn</h3>
-          <div class="cf" data-en="~148 current followers">~148 follower attuali</div>
-          <ul data-en="<li>Comunicazione professionale</li><li>Cantiere, partner, buyer, media</li><li>Articoli tecnici e fanzine</li><li>Eccellenza italiana nel racing</li>">
-            <li>Comunicazione professionale</li>
-            <li>Cantiere, partner, buyer, media</li>
-            <li>Articoli tecnici e fanzine</li>
-            <li>Eccellenza italiana nel racing</li>
+          <div class="cf"><small data-en="Current followers">Follower attuali</small>~148</div>
+          <ul>
+            <li data-en="Boatyard, partners, buyers, media">Cantiere, partner, buyer, media</li>
+            <li data-en="Technical articles and fanzine">Articoli tecnici e fanzine</li>
+            <li data-en="Italian excellence in racing">Eccellenza italiana nel racing</li>
           </ul>
-          <div class="cfreq" data-en="From July <span>2× week</span>">Da Luglio <span>2× sett</span></div>
+          <div class="cfreq" data-en="From 20 July <span>2× week</span>">Da 20 Luglio <span>2× sett</span></div>
         </div>
         <div class="cc">
-          <span class="cr" data-en="Long-form video">Video Long-form</span>
+          <div class="cc-bar" style="background:#ff0000"></div>
+          <span class="cr" data-en="Long-form video · Existing">Video Long-form · Esistente</span>
           <h3>YouTube</h3>
-          <div class="cf" data-en="Channel to activate">Canale da attivare</div>
-          <ul data-en="<li>Interviste complete armatori</li><li>Pillole tecniche in formato esteso</li><li>Video hero del varo</li><li>Documentario costruzione</li>">
-            <li>Interviste complete armatori</li>
-            <li>Pillole tecniche in formato esteso</li>
-            <li>Video hero del varo</li>
-            <li>Documentario costruzione</li>
+          <div class="cf"><small data-en="Channel">Canale</small>Costiera Yacht</div>
+          <ul>
+            <li data-en="Full owner interviews">Interviste complete armatori</li>
+            <li data-en="Technical pills — extended format">Pillole tecniche in formato esteso</li>
+            <li data-en="Hero launch video · Construction doc">Video hero varo · Doc costruzione</li>
           </ul>
           <div class="cfreq" data-en="From September <span>1–2× month</span>">Da Settembre <span>1–2× mese</span></div>
+        </div>
+        <div class="cc">
+          <div class="cc-bar" style="background:#1877f2"></div>
+          <span class="cr" data-en="Community · Sharing">Community · Condivisione</span>
+          <h3>Facebook</h3>
+          <div class="cf"><small data-en="Page">Pagina</small>Da verificare</div>
+          <ul>
+            <li data-en="Community of sailing enthusiasts">Community appassionati vela</li>
+            <li data-en="Share regattas and events">Condivisione regate ed eventi</li>
+            <li data-en="Reach older target · B2B events">Reach target senior · eventi B2B</li>
+          </ul>
+          <div class="cfreq" data-en="From August <span>2× week</span>">Da Agosto <span>2× sett</span></div>
         </div>
       </div>
     </div>
