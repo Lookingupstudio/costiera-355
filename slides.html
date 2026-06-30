@@ -459,24 +459,27 @@
     .pos-dot.hero .pd-sub { color: rgba(160,120,48,.6); }
 
     /* ─── ORIZZONTE SLIDE ─── */
-    #sorizzonte { background: var(--navy); }
-    #sorizzonte .s-label { color: var(--brass-lt); }
-    #sorizzonte .s-title { color: #fff; }
-    #sorizzonte .s-title strong { color: var(--brass-lt); }
-    .or-grid { display: grid; grid-template-columns: 1fr 1px 1fr; flex: 1; margin-top: 40px; gap: 0; }
-    .or-col { padding: 0 48px 0 0; display: flex; flex-direction: column; gap: 2px; }
-    .or-col + .or-col { padding: 0 0 0 48px; }
-    .or-sep { background: rgba(255,255,255,.07); }
-    .or-label { font-size: 11px; font-weight: 700; letter-spacing: .32em; text-transform: uppercase; color: var(--brass); margin-bottom: 16px; display: block; }
-    .or-label.muted { color: rgba(255,255,255,.25); }
-    .or-item { padding: 20px 24px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); }
-    .or-item.secondary { background: rgba(255,255,255,.02); border-color: rgba(255,255,255,.04); }
-    .or-item h4 { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #fff; margin-bottom: 8px; }
-    .or-item h4.dim { color: rgba(255,255,255,.45); }
-    .or-item p { font-size: 13px; color: rgba(255,255,255,.38); line-height: 1.7; }
-    .or-badge { display: inline-block; margin-top: 14px; font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: #fff; padding: 5px 12px; }
+    #sorizzonte { background: var(--navy); padding: 0; }
+    #sorizzonte::before { content: '2026'; position: absolute; bottom: -20px; right: -20px; font-size: clamp(160px,22vw,280px); font-weight: 800; color: rgba(255,255,255,.025); pointer-events: none; line-height: 1; }
+    .or-panels { display: grid; grid-template-columns: 1fr 1fr; flex: 1; height: 100%; }
+    .or-panel { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: flex-end; padding: 56px 52px; }
+    .or-panel-img { position: absolute; inset: 0; background-size: cover; background-position: center; }
+    .or-panel-overlay { position: absolute; inset: 0; }
+    .or-panel.p305 .or-panel-overlay { background: linear-gradient(to top, rgba(8,18,32,.95) 0%, rgba(8,18,32,.5) 60%, rgba(8,18,32,.2) 100%); }
+    .or-panel.coach .or-panel-overlay { background: linear-gradient(to top, rgba(50,10,10,.97) 0%, rgba(80,20,20,.6) 60%, rgba(30,8,8,.25) 100%); }
+    .or-panel-content { position: relative; z-index: 2; }
+    .or-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .36em; text-transform: uppercase; margin-bottom: 14px; display: block; }
+    .or-panel.p305 .or-eyebrow { color: var(--brass-lt); }
+    .or-panel.coach .or-eyebrow { color: #e05050; }
+    .or-panel h3 { font-size: clamp(32px, 4vw, 52px); font-weight: 200; color: #fff; line-height: 1.05; margin-bottom: 18px; }
+    .or-panel h3 strong { font-weight: 700; }
+    .or-panel h3 em { font-style: italic; color: var(--brass-lt); }
+    .or-panel.coach h3 em { color: #e08080; }
+    .or-panel p { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.8; max-width: 400px; margin-bottom: 22px; }
+    .or-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #fff; padding: 7px 18px; }
     .or-badge.br { background: var(--brass); }
-    .or-badge.dk { background: rgba(255,255,255,.1); }
+    .or-badge.red { background: #a02020; }
+    .or-badge.dk { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); }
 
     /* ─── SITO WEB SLIDE ─── */
     .sito-slide { background: #0a0f18; padding: 52px 60px 108px; }
@@ -1070,41 +1073,33 @@
       </div>
     </div>
 
-    <!-- PASSI -->
-    <div class="slide" id="s12">
-      <span class="s-label">Action Plan</span>
-      <h2 class="s-title" data-en="Next <strong>steps.</strong>">Prossimi <strong>passi.</strong></h2>
-      <div class="pl">
-        <div class="pa"><div class="pn">01</div><div><h4 data-en="Define coordinated launch date">Definire data lancio coordinato</h4><p data-en="Social + press + Google Maps — all the same day.">Social + press + Google Maps — tutto lo stesso giorno.</p></div><div class="ps hot" data-en="July">Luglio</div></div>
-        <div class="pa"><div class="pn">02</div><div><h4 data-en="Boatyard shooting coverage">Copertura shooting cantiere</h4><p data-en="23-24 June, 30 June, July — hull infusion and construction.">23-24 giugno, 30 giugno, luglio — infusione scafo e costruzione.</p></div><div class="ps hot" data-en="Ongoing">In corso</div></div>
-        <div class="pa"><div class="pn">03</div><div><h4 data-en="Unified social visual identity">Visual identity social unificata</h4><p data-en="Bio, profile picture, cover on Instagram, TikTok, LinkedIn.">Bio, immagine profilo, cover su Instagram, TikTok, LinkedIn.</p></div><div class="ps" data-en="July">Luglio</div></div>
-        <div class="pa"><div class="pn">04</div><div><h4 data-en="Website plan — two sections">Piano sito web — due sezioni</h4><p data-en="Motor boats (CY39) + sailing boats (Costiera 355).">Barche a motore (CY39) + barche a vela (Costiera 355).</p></div><div class="ps" data-en="July">Luglio</div></div>
-        <div class="pa"><div class="pn">05</div><div><h4 data-en="Sailing line name + August content calendar">Nome linea vela + content calendar agosto</h4><p data-en="Official line naming. First month of planned storytelling.">Naming ufficiale linea. Primo mese di storytelling pianificato.</p></div><div class="ps" data-en="August">Agosto</div></div>
-      </div>
-    </div>
 
     <!-- ORIZZONTE — 305 + Coaching Team -->
     <div class="slide" id="sorizzonte">
-      <span class="s-label lt" data-en="What's coming">L'Orizzonte</span>
-      <h2 class="s-title">Oltre la <strong>355.</strong></h2>
-      <div class="or-grid">
-        <div class="or-col">
-          <span class="or-label" data-en="In discussion · Secondary">In discussione · Punto secondario</span>
-          <div class="or-item secondary">
-            <h4 class="dim" data-en="Costiera 305 · Second Sailing Model">Costiera 305 · Secondo Modello a Vela</h4>
-            <p data-en="A second sporty sailing model under discussion. If confirmed, the boatyard would have three models from September: CY39 (motor), Costiera 355, Costiera 305.">Un secondo modello sportivo a vela in fase di valutazione. Se confermato, da settembre il cantiere avrebbe tre modelli: CY39 (motore), Costiera 355, Costiera 305.</p>
+      <div class="or-panels">
+
+        <div class="or-panel p305">
+          <div class="or-panel-img" style="background-image: url('images/render-2.png'); background-position: center 30%;"></div>
+          <div class="or-panel-overlay"></div>
+          <div class="or-panel-content">
+            <span class="or-eyebrow" data-en="Coming · Second sailing model">In arrivo · Secondo modello a vela</span>
+            <h3>Costiera <strong>305.</strong></h3>
+            <p data-en="A second ORC racing sailboat is being evaluated. If confirmed, from September the boatyard will field three models: CY39, Costiera 355, Costiera 305.">Un secondo modello a vela ORC in fase di valutazione. Se confermato, da settembre il cantiere schiera tre modelli: CY39, Costiera 355, Costiera 305.</p>
             <span class="or-badge dk" data-en="Under evaluation">In valutazione</span>
           </div>
         </div>
-        <div class="or-sep"></div>
-        <div class="or-col">
-          <span class="or-label" data-en="In formation · New service">In formazione · Nuovo servizio</span>
-          <div class="or-item">
-            <h4 data-en="Racing Coaching Team">Racing Coaching Team</h4>
-            <p data-en="We are forming a team dedicated to teaching sport sailing to clients who request it. A service that strengthens the relationship with the buyer and positions Costiera as a complete ecosystem — not just a boatyard.">Stiamo costruendo un team dedicato all'insegnamento della vela sportiva ai clienti che richiedono il servizio. Un'offerta che rafforza il rapporto con il buyer e posiziona Costiera come ecosistema completo — non solo cantiere.</p>
-            <span class="or-badge br" data-en="In formation">In formazione</span>
+
+        <div class="or-panel coach">
+          <div class="or-panel-img" style="background-image: url('images/gen-racing.png'); background-position: center;"></div>
+          <div class="or-panel-overlay"></div>
+          <div class="or-panel-content">
+            <span class="or-eyebrow" data-en="In formation · New service">In formazione · Nuovo servizio</span>
+            <h3>Racing<br><em>Coaching Team.</em></h3>
+            <p data-en="Teaching the sea. Transmitting speed. Costiera is not just a boatyard — it becomes an ecosystem where you buy the boat, learn to sail it, and win with it.">Insegnare il mare. Trasmettere la velocità. Costiera non è solo un cantiere — diventa un ecosistema in cui compri la barca, impari a navigarla e vinci con essa.</p>
+            <span class="or-badge red" data-en="In formation">In formazione</span>
           </div>
         </div>
+
       </div>
     </div>
 
