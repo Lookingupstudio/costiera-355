@@ -510,16 +510,24 @@
     /* mini nav */
     .mini-nav {
       position: absolute; top: 0; left: 0; right: 0; z-index: 10;
-      background: rgba(255,255,255,.95); backdrop-filter: blur(12px);
+      background: rgba(255,255,255,.97); backdrop-filter: blur(12px);
       display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 32px; border-bottom: 1px solid rgba(160,120,48,.12);
+      padding: 11px 28px; border-bottom: 1px solid rgba(12,26,46,.08);
     }
-    .mini-nav img { height: 20px; width: auto; }
-    .mini-nav .links { display: flex; gap: 24px; }
-    .mini-nav .links span { font-size: 8px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: #7a8a9a; }
-    .mini-nav .links span.new-tag { color: #0c1a2e; position: relative; }
-    .mini-nav .links span.new-tag::after { content: 'NUOVO'; position: absolute; top: -8px; right: -24px; font-size: 5px; background: #a07830; color: #fff; padding: 1px 4px; letter-spacing: .1em; }
-    .mini-nav .cta { font-size: 7px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; border: 1px solid rgba(12,26,46,.3); color: #0c1a2e; padding: 6px 16px; }
+    .mini-nav img { height: 18px; width: auto; }
+    .mini-nav .nav-items { display: flex; gap: 20px; align-items: center; }
+    .mini-nav .nav-item { position: relative; }
+    .mini-nav .nav-link { font-size: 7.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #7a8a9a; display: flex; align-items: center; gap: 3px; white-space: nowrap; }
+    .mini-nav .nav-link.active { color: #0c1a2e; }
+    .mini-nav .nav-link .arr { font-size: 6px; color: #a07830; }
+    .mn-dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: #fff; border: 1px solid rgba(12,26,46,.1); min-width: 148px; padding: 6px 0; box-shadow: 0 8px 24px rgba(0,0,0,.1); z-index: 20; }
+    .mn-dropdown::before { content: ''; position: absolute; top: -5px; left: 16px; width: 8px; height: 8px; background: #fff; border-left: 1px solid rgba(12,26,46,.1); border-top: 1px solid rgba(12,26,46,.1); transform: rotate(45deg); }
+    .mn-dd-item { display: block; font-size: 7px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #0c1a2e; padding: 7px 16px; border-bottom: 1px solid rgba(12,26,46,.04); cursor: default; display: flex; align-items: center; gap: 8px; }
+    .mn-dd-item:last-child { border-bottom: none; }
+    .mn-dd-item:hover { background: rgba(160,120,48,.05); }
+    .mn-dd-item.sfocato { filter: blur(1.8px); color: #aab0b8; pointer-events: none; }
+    .mn-dd-badge { font-size: 5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; background: #8a9aaa; color: #fff; padding: 2px 5px; border-radius: 2px; }
+    .mini-nav .cta { font-size: 7px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; border: 1px solid rgba(12,26,46,.3); color: #0c1a2e; padding: 6px 14px; white-space: nowrap; }
     /* split hero */
     .mini-hero { display: grid; grid-template-columns: 1fr 1fr; height: 100%; }
     .mh-vela {
@@ -1110,8 +1118,8 @@
 
     <!-- SITO WEB -->
     <div class="slide sito-slide" id="ssito">
-      <span class="s-label lt" data-en="The Website · New Structure">Il Sito Web · Nuova Struttura</span>
-      <h2 class="s-title wh" data-en="Two sections.<br><strong>One single identity.</strong>">Due sezioni.<br><strong>Un'unica identità.</strong></h2>
+      <span class="s-label lt" data-en="costierayacht.com · New Menu">costierayacht.com · Nuovo Menu</span>
+      <h2 class="s-title wh" data-en="Three product lines.<br><strong>One navigation.</strong>">Tre linee prodotto.<br><strong>Un'unica navigazione.</strong></h2>
       <div class="browser">
         <div class="browser-bar">
           <div class="browser-dots"><span></span><span></span><span></span></div>
@@ -1120,11 +1128,26 @@
         <div class="browser-content">
           <div class="mini-nav">
             <img src="images/logo-black.png" alt="Costiera Yacht" />
-            <div class="links">
-              <span class="new-tag">Costiera 355</span>
-              <span>CY 39</span>
-              <span data-en="The Project">Il Progetto</span>
-              <span data-en="Contacts">Contatti</span>
+            <div class="nav-items">
+              <div class="nav-item">
+                <span class="nav-link" data-en="The Shipyard">Il Cantiere</span>
+              </div>
+              <div class="nav-item">
+                <span class="nav-link active" data-en="Sailing Boats ▾">Barche a Vela <span class="arr">▾</span></span>
+                <div class="mn-dropdown">
+                  <span class="mn-dd-item">Costiera 355</span>
+                  <span class="mn-dd-item sfocato">Costiera 305 <span class="mn-dd-badge">PRESTO</span></span>
+                </div>
+              </div>
+              <div class="nav-item">
+                <span class="nav-link" data-en="Motor Boats ▾">Barche a Motore <span class="arr">▾</span></span>
+              </div>
+              <div class="nav-item">
+                <span class="nav-link">News</span>
+              </div>
+              <div class="nav-item">
+                <span class="nav-link" data-en="Contacts">Contatti</span>
+              </div>
             </div>
             <div class="cta" data-en="Request Info">Richiedi Info</div>
           </div>
