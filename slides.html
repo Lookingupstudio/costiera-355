@@ -193,7 +193,9 @@
     #s6 { background: var(--white); }
     .pg { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 40px; flex: 1; }
     .pc { background: var(--off); padding: 36px 32px; border: 1px solid rgba(160,120,48,.08); transition: border-color .3s, background .3s; display: flex; flex-direction: column; }
-    .pc:hover { border-color: rgba(160,120,48,.3); background: var(--white); }
+    .pc:hover { border-color: rgba(160,120,48,.4); background: rgba(255,255,255,.08); }
+    .pc:hover .pc-name { color: #fff; }
+    .pc:hover .pc-role { color: var(--brass-lt); }
     .pc .pn { font-size: 44px; font-weight: 200; color: rgba(160,120,48,.18); line-height: 1; margin-bottom: 14px; }
     .pc h3 { font-size: 17px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--navy); margin-bottom: 12px; }
     .pc p { font-size: 14px; line-height: 1.75; color: var(--muted); flex: 1; }
@@ -427,22 +429,16 @@
 
     /* ─── EMOTIONAL GRAPH ─── */
     #sgraph { background: var(--navy); align-items: center; justify-content: center; }
-    #sgraph .s-label { color: var(--brass-lt); }
-    #sgraph .s-title { color: #fff; margin-bottom: 44px; }
-    .graph-wrap { display: flex; gap: 88px; align-items: center; }
-    .donut-wrap { position: relative; width: 360px; height: 360px; flex-shrink: 0; }
-    .donut { width: 360px; height: 360px; border-radius: 50%; background: conic-gradient(#b83228 0% 35%, #d45a50 35% 60%, #4a7a9a 60% 80%, #2a4060 80% 90%, #1a9950 90% 100%); }
-    .donut-hole { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 210px; height: 210px; border-radius: 50%; background: var(--navy); display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .donut-hole span { font-size: 12px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: rgba(255,255,255,.3); }
-    .donut-hole strong { font-size: 38px; font-weight: 200; color: var(--brass-lt); margin-top: 4px; }
-    .graph-legend { display: flex; flex-direction: column; gap: 22px; flex: 1; }
-    .gl-item { display: flex; align-items: center; gap: 20px; padding: 14px 20px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); transition: background .2s; }
-    .gl-item:hover { background: rgba(255,255,255,.08); }
-    .gl-dot { width: 18px; height: 18px; border-radius: 3px; flex-shrink: 0; }
-    .gl-info { display: flex; flex-direction: column; gap: 3px; flex: 1; }
-    .gl-name { font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: rgba(255,255,255,.85); }
-    .gl-role { font-size: 11px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.3); }
-    .gl-pct { font-size: 38px; font-weight: 200; color: rgba(255,255,255,.45); min-width: 70px; text-align: right; }
+    #sgraph { padding: 0; overflow: hidden; }
+    .bell-fullsvg { display: block; width: 100%; height: 100%; }
+    /* Slide pillar */
+    .pillar-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 16px; flex: 1; }
+    .pc { display: flex; flex-direction: column; padding: 22px 18px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); }
+    .pc-accent { height: 3px; margin-bottom: 20px; }
+    .pc-role { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.28); margin-bottom: 8px; }
+    .pc-name { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: rgba(255,255,255,.85); margin: 0 0 10px; }
+    .pc-desc { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.75; flex: 1; }
+    .pc-pct { font-size: 30px; font-weight: 200; color: rgba(255,255,255,.14); margin-top: 14px; align-self: flex-end; }
 
     /* ─── REFERENCE / POSIZIONAMENTO ─── */
     #sref { background: var(--navy); }
@@ -837,57 +833,172 @@
 
     <!-- GRAFICO EMOZIONALE -->
     <div class="slide" id="sgraph">
-      <span class="s-label lt" data-en="Emotional Strategy">Strategia Emozionale</span>
-      <h2 class="s-title">Il cuore della <strong>comunicazione.</strong></h2>
-      <div class="graph-wrap">
-        <div class="donut-wrap">
-          <div class="donut"></div>
-          <div class="donut-hole">
-            <span data-en="EMOTION">EMOZIONE</span>
-            <strong>60%</strong>
-          </div>
+      <!-- SVG full-screen 1280×720 — lista sinistra + campana gaussiana -->
+      <svg class="bell-fullsvg" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="gTech" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#4a7a9a" stop-opacity="0.42"/>
+            <stop offset="100%" stop-color="#4a7a9a" stop-opacity="0.03"/>
+          </linearGradient>
+          <linearGradient id="gEmoFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#b83228" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#b83228" stop-opacity="0.05"/>
+          </linearGradient>
+          <linearGradient id="gVid" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#6a3a30" stop-opacity="0.28"/>
+            <stop offset="100%" stop-color="#6a3a30" stop-opacity="0.02"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ═══ PANNELLO SINISTRO ═══════════════════════════════════════════ -->
+        <rect x="0" y="0" width="310" height="720" fill="rgba(8,14,26,.55)"/>
+        <line x1="310" y1="0" x2="310" y2="720" stroke="rgba(255,255,255,.07)" stroke-width="1"/>
+
+        <!-- Label -->
+        <text x="52" y="84" font-family="Montserrat,sans-serif" font-size="10" font-weight="700"
+              letter-spacing="3" text-transform="uppercase" fill="rgba(196,160,96,.7)"
+              data-en="EMOTIONAL STRATEGY">STRATEGIA EMOZIONALE</text>
+
+        <!-- Titolo -->
+        <text x="52" y="130" font-family="Montserrat,sans-serif" font-size="28" font-weight="300" fill="rgba(255,255,255,.9)" data-en="The heart of">Il cuore della</text>
+        <text x="52" y="168" font-family="Montserrat,sans-serif" font-size="28" font-weight="700" fill="#fff" data-en="communication.">comunicazione.</text>
+
+        <!-- Separatore -->
+        <line x1="52" y1="196" x2="258" y2="196" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+
+        <!-- Lista pillar -->
+        <!-- Armatori -->
+        <rect x="52" y="218" width="4" height="52" rx="2" fill="#b83228"/>
+        <text x="68" y="240" font-family="Montserrat,sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="rgba(255,255,255,.85)" data-en="OWNERS">ARMATORI</text>
+        <text x="68" y="256" font-family="Montserrat,sans-serif" font-size="9"  font-weight="600" letter-spacing="1.5" fill="rgba(255,255,255,.3)" data-en="EMOTION">EMOZIONE</text>
+        <text x="278" y="248" font-family="Montserrat,sans-serif" font-size="20" font-weight="200" fill="rgba(184,50,40,.5)" text-anchor="end">35%</text>
+
+        <!-- CfA -->
+        <rect x="52" y="290" width="4" height="52" rx="2" fill="#d45a50"/>
+        <text x="68" y="312" font-family="Montserrat,sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="rgba(255,255,255,.85)">COSSUTTI GANZ</text>
+        <text x="68" y="328" font-family="Montserrat,sans-serif" font-size="9"  font-weight="600" letter-spacing="1.5" fill="rgba(255,255,255,.3)" data-en="EMO + TECH">EMO + TECNICA</text>
+        <text x="278" y="320" font-family="Montserrat,sans-serif" font-size="20" font-weight="200" fill="rgba(184,50,40,.4)" text-anchor="end">25%</text>
+
+        <!-- Pillole -->
+        <rect x="52" y="362" width="4" height="52" rx="2" fill="#4a7a9a"/>
+        <text x="68" y="384" font-family="Montserrat,sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="rgba(255,255,255,.85)" data-en="TECHNICAL PILLS">PILLOLE TECNICHE</text>
+        <text x="68" y="400" font-family="Montserrat,sans-serif" font-size="9"  font-weight="600" letter-spacing="1.5" fill="rgba(255,255,255,.3)" data-en="AUTHORITY">AUTOREVOLEZZA</text>
+        <text x="278" y="392" font-family="Montserrat,sans-serif" font-size="20" font-weight="200" fill="rgba(74,122,154,.45)" text-anchor="end">20%</text>
+
+        <!-- Costruzione -->
+        <rect x="52" y="434" width="4" height="52" rx="2" fill="#3a6080"/>
+        <text x="68" y="456" font-family="Montserrat,sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="rgba(255,255,255,.85)" data-en="CONSTRUCTION">COSTRUZIONE</text>
+        <text x="68" y="472" font-family="Montserrat,sans-serif" font-size="9"  font-weight="600" letter-spacing="1.5" fill="rgba(255,255,255,.3)" data-en="CREDIBILITY">CREDIBILITÀ</text>
+        <text x="278" y="464" font-family="Montserrat,sans-serif" font-size="20" font-weight="200" fill="rgba(74,122,154,.3)" text-anchor="end">10%</text>
+
+        <!-- Video -->
+        <rect x="52" y="506" width="4" height="52" rx="2" fill="#1a9950"/>
+        <text x="68" y="528" font-family="Montserrat,sans-serif" font-size="13" font-weight="700" letter-spacing="1" fill="rgba(255,255,255,.85)" data-en="LAUNCH VIDEO">VIDEO FINALE</text>
+        <text x="68" y="544" font-family="Montserrat,sans-serif" font-size="9"  font-weight="600" letter-spacing="1.5" fill="rgba(255,255,255,.3)" data-en="EMOTIONAL PEAK">PICCO EMOZIONALE</text>
+        <text x="278" y="536" font-family="Montserrat,sans-serif" font-size="20" font-weight="200" fill="rgba(100,80,60,.4)" text-anchor="end">10%</text>
+
+        <!-- ═══ CAMPANA GAUSSIANA ════════════════════════════════════════════
+             chart x: 330→1260 (W=930)   baseline y=560  (nav bar libera ~160px sotto)
+             5 sezioni 186px  |  bounds: 330,516,702,888,1074,1260
+             centers: 423,609,795,981,1167
+             Gaussian  μ=888  σ=130px  |  y = 560 − gauss×490
+             @ baseline→560  702/1074→349  795/981→149  888→70
+        ════════════════════════════════════════════════════════════════════ -->
+
+        <!-- Baseline -->
+        <line x1="330" y1="560" x2="1260" y2="560" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+
+        <!-- Fill TECNICA  x=330→702 -->
+        <path d="M330,560 C390,560 456,557 516,557 C576,557 596,548 609,504 C622,482 658,418 702,349 L702,560 Z"
+              fill="url(#gTech)"/>
+
+        <!-- Fill EMOZIONE  x=702→1074 -->
+        <path d="M702,349 C728,292 762,210 795,149 C820,104 854,70 888,70 C922,70 956,104 981,149 C1014,210 1048,292 1074,349 L1074,560 L702,560 Z"
+              fill="url(#gEmoFill)"/>
+
+        <!-- Fill VIDEO  x=1074→1260 -->
+        <path d="M1074,349 C1116,418 1150,482 1167,504 C1180,530 1208,554 1260,560 L1260,560 L1074,560 Z"
+              fill="url(#gVid)"/>
+
+        <!-- Curve stroke -->
+        <path d="M330,560 C390,560 456,557 516,557 C576,557 596,548 609,504 C622,482 658,418 702,349 C728,292 762,210 795,149 C820,104 854,70 888,70 C922,70 956,104 981,149 C1014,210 1048,292 1074,349 C1116,418 1150,482 1167,504 C1180,530 1208,554 1260,560"
+              fill="none" stroke="rgba(255,255,255,.28)" stroke-width="2.5" stroke-linejoin="round"/>
+
+        <!-- Dividers -->
+        <line x1="702"  y1="349" x2="702"  y2="560" stroke="rgba(255,255,255,.2)"  stroke-width="1"/>
+        <line x1="888"  y1="70"  x2="888"  y2="560" stroke="rgba(255,255,255,.18)" stroke-width="1" stroke-dasharray="6,6"/>
+        <line x1="1074" y1="349" x2="1074" y2="560" stroke="rgba(255,255,255,.2)"  stroke-width="1"/>
+
+        <!-- % dentro la campana -->
+        <text x="609"  y="494" text-anchor="middle" fill="rgba(74,122,154,.45)"  font-family="Montserrat,sans-serif" font-size="14" font-weight="700">20%</text>
+        <text x="795"  y="128" text-anchor="middle" fill="rgba(255,255,255,.75)" font-family="Montserrat,sans-serif" font-size="36" font-weight="200">35%</text>
+        <text x="981"  y="128" text-anchor="middle" fill="rgba(255,255,255,.62)" font-family="Montserrat,sans-serif" font-size="30" font-weight="200">25%</text>
+        <text x="1167" y="494" text-anchor="middle" fill="rgba(140,80,70,.4)"    font-family="Montserrat,sans-serif" font-size="14" font-weight="700">10%</text>
+
+        <!-- Label asse X  — sopra la nav bar -->
+        <text x="423"  y="578" text-anchor="middle" fill="rgba(74,122,154,.5)"  font-family="Montserrat,sans-serif" font-size="11" font-weight="700" letter-spacing="1" data-en="CONSTRUCTION">COSTRUZIONE</text>
+        <text x="423"  y="593" text-anchor="middle" fill="rgba(74,122,154,.28)" font-family="Montserrat,sans-serif" font-size="9"  letter-spacing=".8" data-en="CREDIBILITY">CREDIBILITÀ</text>
+
+        <text x="609"  y="578" text-anchor="middle" fill="rgba(74,122,154,.5)"  font-family="Montserrat,sans-serif" font-size="11" font-weight="700" letter-spacing="1" data-en="TECH PILLS">PILLOLE TECNICHE</text>
+        <text x="609"  y="593" text-anchor="middle" fill="rgba(74,122,154,.28)" font-family="Montserrat,sans-serif" font-size="9"  letter-spacing=".8" data-en="AUTHORITY">AUTOREVOLEZZA</text>
+
+        <text x="795"  y="578" text-anchor="middle" fill="rgba(184,50,40,.88)"  font-family="Montserrat,sans-serif" font-size="11" font-weight="700" letter-spacing="1" data-en="OWNERS">ARMATORI</text>
+        <text x="795"  y="593" text-anchor="middle" fill="rgba(184,50,40,.52)"  font-family="Montserrat,sans-serif" font-size="9"  letter-spacing=".8" data-en="EMOTION">EMOZIONE</text>
+
+        <text x="981"  y="578" text-anchor="middle" fill="rgba(184,50,40,.75)"  font-family="Montserrat,sans-serif" font-size="11" font-weight="700" letter-spacing="1">COSSUTTI GANZ</text>
+        <text x="981"  y="593" text-anchor="middle" fill="rgba(184,50,40,.42)"  font-family="Montserrat,sans-serif" font-size="9"  letter-spacing=".8" data-en="EMO+TECH">EMOZIONE + TECNICA</text>
+
+        <text x="1167" y="578" text-anchor="middle" fill="rgba(140,80,70,.48)"  font-family="Montserrat,sans-serif" font-size="11" font-weight="700" letter-spacing="1" data-en="LAUNCH VIDEO">VIDEO FINALE</text>
+        <text x="1167" y="593" text-anchor="middle" fill="rgba(140,80,70,.28)"  font-family="Montserrat,sans-serif" font-size="9"  letter-spacing=".8" data-en="EMOTIONAL PEAK">PICCO EMOZIONALE</text>
+
+        <!-- Bracket EMOTIVITÀ -->
+        <line x1="702" y1="44" x2="1074" y2="44" stroke="rgba(184,50,40,.32)" stroke-width="1.5"/>
+        <line x1="702" y1="44" x2="702"  y2="54" stroke="rgba(184,50,40,.32)" stroke-width="1.5"/>
+        <line x1="1074" y1="44" x2="1074" y2="54" stroke="rgba(184,50,40,.32)" stroke-width="1.5"/>
+        <text x="888" y="40" text-anchor="middle" fill="rgba(184,50,40,.58)" font-family="Montserrat,sans-serif" font-size="10" font-weight="700" letter-spacing="3.5" data-en="EMOTIONALITY">EMOTIVITÀ</text>
+      </svg>
+    </div>
+
+
+    <!-- PILLAR — MACRO ARGOMENTI -->
+    <div class="slide" id="spillar">
+      <span class="s-label lt" data-en="Content Strategy">Strategia Contenuti</span>
+      <h2 class="s-title" data-en="The five <strong>pillars.</strong>">I cinque <strong>pillar.</strong></h2>
+      <div class="pillar-grid">
+        <div class="pc">
+          <div class="pc-accent" style="background:#b83228;"></div>
+          <div class="pc-role" data-en="EMOTION">EMOZIONE</div>
+          <div class="pc-name" data-en="Owners">Armatori</div>
+          <p class="pc-desc" data-en="The owners tell the story: the lived experience of the project, the passion of those who will sail it.">Gli armatori raccontano: il vissuto del progetto, la passione di chi la vivrà in acqua.</p>
+          <div class="pc-pct">25%</div>
         </div>
-        <div class="graph-legend">
-          <div class="gl-item">
-            <div class="gl-dot" style="background:#b83228"></div>
-            <div class="gl-info">
-              <span class="gl-name" data-en="Owners">Armatori</span>
-              <span class="gl-role" data-en="EMOTION">EMOZIONE</span>
-            </div>
-            <span class="gl-pct">35%</span>
-          </div>
-          <div class="gl-item">
-            <div class="gl-dot" style="background:#d45a50"></div>
-            <div class="gl-info">
-              <span class="gl-name">Cossutti Ganz</span>
-              <span class="gl-role" data-en="EMOTION + TECHNIQUE">EMOZIONE + TECNICA</span>
-            </div>
-            <span class="gl-pct">25%</span>
-          </div>
-          <div class="gl-item">
-            <div class="gl-dot" style="background:#4a7a9a"></div>
-            <div class="gl-info">
-              <span class="gl-name" data-en="Technical Pills">Pillole Tecniche</span>
-              <span class="gl-role" data-en="AUTHORITY">AUTOREVOLEZZA</span>
-            </div>
-            <span class="gl-pct">20%</span>
-          </div>
-          <div class="gl-item">
-            <div class="gl-dot" style="background:#2a4060"></div>
-            <div class="gl-info">
-              <span class="gl-name" data-en="Construction">Costruzione</span>
-              <span class="gl-role" data-en="CREDIBILITY">CREDIBILITÀ</span>
-            </div>
-            <span class="gl-pct">10%</span>
-          </div>
-          <div class="gl-item">
-            <div class="gl-dot" style="background:#1a9950"></div>
-            <div class="gl-info">
-              <span class="gl-name" data-en="Final Video · Launch">Video Finale · Varo</span>
-              <span class="gl-role" data-en="EMOTIONAL PEAK">PICCO EMOZIONALE</span>
-            </div>
-            <span class="gl-pct">10%</span>
-          </div>
+        <div class="pc">
+          <div class="pc-accent" style="background:#d45a50;"></div>
+          <div class="pc-role" data-en="EMOTION + TECHNIQUE">EMOZIONE + TECNICA</div>
+          <div class="pc-name">Cossutti Ganz</div>
+          <p class="pc-desc" data-en="The designers tell the story of their choices, materials, the philosophy behind the 355.">I progettisti raccontano le scelte, i materiali, la filosofia dietro la 355.</p>
+          <div class="pc-pct">25%</div>
+        </div>
+        <div class="pc">
+          <div class="pc-accent" style="background:#4a7a9a;"></div>
+          <div class="pc-role" data-en="AUTHORITY">AUTOREVOLEZZA</div>
+          <div class="pc-name" data-en="Technical Pills">Pillole Tecniche</div>
+          <p class="pc-desc" data-en="Performance, construction, ORC — technical content that builds credibility.">Performance, costruzione, ORC — la tecnica si trasforma in contenuto di autorevolezza.</p>
+          <div class="pc-pct">20%</div>
+        </div>
+        <div class="pc">
+          <div class="pc-accent" style="background:#3a6080;"></div>
+          <div class="pc-role" data-en="CREDIBILITY">CREDIBILITÀ</div>
+          <div class="pc-name" data-en="Construction">Costruzione</div>
+          <p class="pc-desc" data-en="Every milestone in the boatyard becomes a narrative episode to document.">Ogni milestone del cantiere diventa un episodio narrativo da documentare e raccontare.</p>
+          <div class="pc-pct">15%</div>
+        </div>
+        <div class="pc">
+          <div class="pc-accent" style="background:#1a9950;"></div>
+          <div class="pc-role" data-en="EMOTIONAL PEAK">PICCO EMOZIONALE</div>
+          <div class="pc-name" data-en="Launch Video">Video Finale · Varo</div>
+          <p class="pc-desc" data-en="The moment everything converges — the November launch is the climax of the entire story.">Il momento in cui tutto converge. Il varo di novembre è il culmine di tutta la narrazione.</p>
+          <div class="pc-pct">15%</div>
         </div>
       </div>
     </div>
