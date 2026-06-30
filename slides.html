@@ -377,32 +377,38 @@
     .tslide.secondary .tg-card .tg-note { color: var(--muted); border-color: rgba(160,120,48,.1); }
 
     /* ─── CONTENUTI 2026 SLIDE ─── */
-    #scontenuti { background: var(--white); }
-    #scontenuti .s-label { color: var(--brass); }
-    .cont-head { display: flex; align-items: baseline; gap: 24px; margin-bottom: 28px; }
-    .cont-cal { font-size: 12px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--muted); border: 1px solid rgba(160,120,48,.2); padding: 6px 16px; }
-    .cont-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 2px; flex: 1; }
-    .cont-card { padding: 24px 20px; border: 1px solid rgba(160,120,48,.08); display: flex; flex-direction: column; }
-    .cont-card.emotion { background: var(--navy); border-color: transparent; }
-    .cont-card.auth { background: var(--off); }
-    .cont-card.cred { background: #f0f2f4; }
-    .cont-card.peak { background: #0d2a1a; border-color: transparent; }
-    .cont-pct { font-size: 38px; font-weight: 200; line-height: 1; margin-bottom: 12px; }
-    .cont-card.emotion .cont-pct { color: var(--brass-lt); }
-    .cont-card.auth .cont-pct { color: var(--brass); }
-    .cont-card.cred .cont-pct { color: #6a7a8a; }
-    .cont-card.peak .cont-pct { color: #2adc70; }
-    .cont-card h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; }
-    .cont-card.emotion h3, .cont-card.peak h3 { color: rgba(255,255,255,.85); }
-    .cont-card.auth h3, .cont-card.cred h3 { color: var(--navy); }
-    .cont-card p { font-size: 12px; line-height: 1.7; flex: 1; }
-    .cont-card.emotion p, .cont-card.peak p { color: rgba(255,255,255,.35); }
-    .cont-card.auth p, .cont-card.cred p { color: var(--muted); }
+    #scontenuti { background: var(--navy); }
+    #scontenuti .s-label { color: var(--brass-lt); }
+    #scontenuti .s-title { color: #fff; margin-bottom: 24px; }
+    .cont-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 3px; flex: 1; }
+    .cont-card { padding: 24px 20px; display: flex; flex-direction: column; }
+    .cont-card.emotion { background: #b83228; }
+    .cont-card.auth { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); }
+    .cont-card.cred { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); }
+    .cont-card.peak { background: #0f3320; border: 1px solid rgba(42,180,90,.2); }
+    .cont-pct { font-size: 42px; font-weight: 200; line-height: 1; margin-bottom: 10px; }
+    .cont-card.emotion .cont-pct { color: rgba(255,255,255,.9); }
+    .cont-card.auth .cont-pct { color: var(--brass-lt); }
+    .cont-card.cred .cont-pct { color: rgba(255,255,255,.3); }
+    .cont-card.peak .cont-pct { color: #3adc7a; }
+    .cont-card h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 14px; color: rgba(255,255,255,.9); }
+    .cont-card.cred h3 { color: rgba(255,255,255,.5); }
+    .cont-card ul { list-style: none; flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .cont-card ul li { font-size: 12px; line-height: 1.5; padding-left: 14px; position: relative; }
+    .cont-card ul li::before { content: '—'; position: absolute; left: 0; font-size: 10px; }
+    .cont-card.emotion ul li { color: rgba(255,255,255,.75); }
+    .cont-card.emotion ul li::before { color: rgba(255,255,255,.4); }
+    .cont-card.auth ul li { color: rgba(255,255,255,.55); }
+    .cont-card.auth ul li::before { color: var(--brass); }
+    .cont-card.cred ul li { color: rgba(255,255,255,.35); }
+    .cont-card.cred ul li::before { color: rgba(255,255,255,.2); }
+    .cont-card.peak ul li { color: rgba(255,255,255,.6); }
+    .cont-card.peak ul li::before { color: #3adc7a; }
     .cont-role { margin-top: 16px; font-size: 9px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; padding: 5px 10px; display: inline-block; }
-    .cont-card.emotion .cont-role { background: rgba(160,120,48,.25); color: var(--brass-lt); }
-    .cont-card.auth .cont-role { background: rgba(160,120,48,.12); color: var(--brass); }
-    .cont-card.cred .cont-role { background: rgba(100,120,140,.12); color: #5a7a8a; }
-    .cont-card.peak .cont-role { background: rgba(42,220,112,.15); color: #2adc70; }
+    .cont-card.emotion .cont-role { background: rgba(0,0,0,.2); color: rgba(255,255,255,.7); }
+    .cont-card.auth .cont-role { background: rgba(160,120,48,.2); color: var(--brass-lt); }
+    .cont-card.cred .cont-role { background: rgba(255,255,255,.06); color: rgba(255,255,255,.3); }
+    .cont-card.peak .cont-role { background: rgba(42,180,90,.15); color: #3adc7a; }
 
     /* ─── EMOTIONAL GRAPH ─── */
     #sgraph { background: var(--navy); align-items: center; justify-content: center; }
@@ -799,38 +805,61 @@
 
     <!-- CONTENUTI 2026 -->
     <div class="slide" id="scontenuti">
-      <span class="s-label" data-en="Content Strategy 2026">Strategia Contenuti 2026</span>
+      <span class="s-label lt" data-en="Content Strategy 2026">Strategia Contenuti 2026</span>
       <h2 class="s-title">Cinque macro <strong>aree.</strong></h2>
-      <div style="font-size:12px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--brass);margin-bottom:20px;margin-top:-4px;" data-en="From July · 2–3 posts/week · Start first week of July">Da Luglio · 2–3 post/settimana · Prima pubblicazione prima settimana di luglio</div>
       <div class="cont-grid">
         <div class="cont-card emotion">
           <div class="cont-pct">35%</div>
-          <h3 data-en="Owners">Armatori</h3>
-          <p data-en="Interviews with Jesper and the owners. They speak. Stories, passion, the why behind the boat.">Interviste a Jesper e agli armatori. Parlano loro. Storie, passione, il perché dietro alla barca.</p>
+          <h3 data-en="Owners — Jesper">Armatori — Jesper</h3>
+          <ul>
+            <li data-en="Jesper speaks: his story, his passion, the boat">Jesper parla: la sua storia, la sua passione, la barca</li>
+            <li data-en="Long-form video interviews">Interviste video in formato lungo</li>
+            <li data-en="Emotional: why this boat, why now">Emotivo: perché questa barca, perché ora</li>
+            <li data-en="Highest emotional impact of all formats">Massimo impatto emozionale di tutti i formati</li>
+          </ul>
           <span class="cont-role" data-en="EMOTION">EMOZIONE</span>
         </div>
         <div class="cont-card emotion">
           <div class="cont-pct">25%</div>
-          <h3 data-en="Cossutti Ganz">Cossutti Ganz</h3>
-          <p data-en="The design studio tells the story of the 355. Technical passion becomes narrative.">Lo studio progettuale racconta la 355. La passione tecnica diventa narrazione.</p>
+          <h3>Cossutti Ganz</h3>
+          <ul>
+            <li data-en="Leading European racing design studio">Studio progettuale tra i più autorevoli nel racing europeo</li>
+            <li data-en="Authors of the Beneteau First 36 SE">Autori del Beneteau First 36 SE</li>
+            <li data-en="Interviews on the design of the 355">Interviste sulla progettazione della 355</li>
+            <li data-en="Technical passion becomes story">La passione tecnica diventa narrazione</li>
+          </ul>
           <span class="cont-role" data-en="EMOTION + TECHNIQUE">EMOZIONE + TECNICA</span>
         </div>
         <div class="cont-card auth">
           <div class="cont-pct">20%</div>
           <h3 data-en="Technical Pills">Pillole Tecniche</h3>
-          <p data-en="Micro-interviews with designers. Technical data, materials, construction choices. Builds authority for emotion.">Micro-interviste ai progettisti. Dati tecnici, materiali, scelte costruttive. Dà autorevolezza all'emozione.</p>
+          <ul>
+            <li data-en="Micro-interviews with designers">Micro-interviste ai progettisti</li>
+            <li data-en="Materials: infusion, carbon, composite keel">Materiali: infusione, carbonio, deriva composita</li>
+            <li data-en="ORC rating and construction choices">Rating ORC e scelte costruttive</li>
+            <li data-en="Builds authority — trust in the brand">Crea autorevolezza — fiducia nel brand</li>
+          </ul>
           <span class="cont-role" data-en="AUTHORITY">AUTOREVOLEZZA</span>
         </div>
         <div class="cont-card cred">
           <div class="cont-pct">10%</div>
           <h3 data-en="Construction">Costruzione</h3>
-          <p data-en="Archive photos and videos from the boatyard. Concrete proof. The boat being built, for real.">Foto e video d'archivio del cantiere. La prova concreta. La barca che si costruisce, davvero.</p>
+          <ul>
+            <li data-en="Videos from the boatyard — work in progress">Video dal cantiere — lavori in corso</li>
+            <li data-en="Archive photos and construction steps">Foto d'archivio e fasi costruttive</li>
+            <li data-en="Concrete proof: the boat is being built">Prova concreta: la barca si costruisce davvero</li>
+          </ul>
           <span class="cont-role" data-en="CREDIBILITY">CREDIBILITÀ</span>
         </div>
         <div class="cont-card peak">
           <div class="cont-pct">10%</div>
-          <h3 data-en="Final Video">Video Finale</h3>
-          <p data-en="The boat in the water. The launch. The result of everything. Emotional peak of the whole story.">La barca in acqua. Il varo. Il risultato di tutto. Picco emozionale dell'intera storia.</p>
+          <h3 data-en="Final Video · Launch">Video Finale · Varo</h3>
+          <ul>
+            <li data-en="Boat in water · The launch">Barca in acqua · Il varo</li>
+            <li data-en="Hero video — launch release">Video hero — uscita di lancio</li>
+            <li data-en="Emotional peak of the whole story">Picco emozionale dell'intera storia</li>
+            <li data-en="November 2026">Novembre 2026</li>
+          </ul>
           <span class="cont-role" data-en="EMOTIONAL PEAK">PICCO EMOZIONALE</span>
         </div>
       </div>
