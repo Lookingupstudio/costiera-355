@@ -344,18 +344,37 @@
     .barca-spec dt { font-size: 10px; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--brass); margin-bottom: 4px; }
     .barca-spec dd { font-size: 13.5px; color: rgba(255,255,255,.7); line-height: 1.4; }
 
-    /* ─── TARGET SECONDARI ─── */
-    .tslide.secondary { background: #ebebea; }
-    .tslide.secondary .tg-card { background: #f2f1ef; border-color: rgba(0,0,0,.06); }
-    .tslide.secondary .tg-n { color: rgba(0,0,0,.07); }
-    .tslide.secondary .tg-card h3 { color: #6a7a8a; }
-    .tslide.secondary .tg-card .tg-sub { color: #aab0b8; }
-    .tslide.secondary .tg-card .tg-row dt { color: #aab0b8; }
-    .tslide.secondary .tg-card .tg-row dd { color: #8a9098; }
-    .tslide.secondary .tg-card .tg-key { background: #8a9aaa; color: #fff; }
-    .tslide.secondary .tg-card .tg-note { color: #aab0b8; border-color: rgba(0,0,0,.06); }
-    .primary-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: #fff; background: var(--brass); padding: 5px 14px; margin-bottom: 12px; }
-    .secondary-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .28em; text-transform: uppercase; color: #8a9aaa; border: 1px solid #c0c8d0; padding: 5px 14px; margin-bottom: 12px; }
+    /* ─── TARGET PRIMARI — slide 7 ─── */
+    .tslide { background: var(--navy); }
+    .tslide .s-label { color: var(--brass-lt); }
+    .tslide .s-title { color: #fff; }
+    .tslide .s-title strong { color: #fff; }
+    .tg-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 12px; flex: 1; }
+    .tg-card { background: rgba(255,255,255,.05); padding: 32px 28px; border: 1px solid rgba(255,255,255,.08); border-top: 3px solid rgba(160,120,48,.25); transition: background .3s, border-color .3s; display: flex; flex-direction: column; }
+    .tg-card:hover { background: rgba(255,255,255,.09); border-color: rgba(160,120,48,.5); }
+    .tg-card.highlight { border-top-color: var(--brass); background: rgba(160,120,48,.08); }
+    .tg-n { font-size: 52px; font-weight: 200; color: rgba(160,120,48,.2); line-height: 1; margin-bottom: 14px; }
+    .tg-card h3 { font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: #fff; margin-bottom: 6px; }
+    .tg-card .tg-sub { font-size: 12px; color: rgba(255,255,255,.35); margin-bottom: 20px; }
+    .tg-card .tg-row { margin-bottom: 10px; }
+    .tg-card .tg-row dt { font-size: 10px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--brass); }
+    .tg-card .tg-row dd { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.5; margin-top: 2px; }
+    .tg-card .tg-key { display: inline-block; margin-top: auto; padding-top: 18px; font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--white); background: var(--brass); padding: 6px 14px; }
+    .tg-card .tg-note { font-size: 12px; font-style: italic; color: rgba(255,255,255,.25); margin-top: 12px; border-top: 1px solid rgba(255,255,255,.06); padding-top: 12px; line-height: 1.6; }
+
+    /* ─── TARGET SECONDARI — slide 8 ─── */
+    .tslide.secondary { background: #f0ede8; }
+    .tslide.secondary .s-label { color: var(--brass); }
+    .tslide.secondary .s-title { color: var(--navy); }
+    .tslide.secondary .tg-card { background: var(--white); border: 1px solid rgba(160,120,48,.1); border-top: 3px solid rgba(160,120,48,.15); }
+    .tslide.secondary .tg-card:hover { border-color: rgba(160,120,48,.3); border-top-color: var(--brass); }
+    .tslide.secondary .tg-n { color: rgba(160,120,48,.12); }
+    .tslide.secondary .tg-card h3 { color: var(--navy); opacity: .7; }
+    .tslide.secondary .tg-card .tg-sub { color: var(--muted); }
+    .tslide.secondary .tg-card .tg-row dt { color: var(--brass); opacity: .7; }
+    .tslide.secondary .tg-card .tg-row dd { color: var(--muted); }
+    .tslide.secondary .tg-card .tg-key { background: #8a9aaa; }
+    .tslide.secondary .tg-card .tg-note { color: var(--muted); border-color: rgba(160,120,48,.1); }
 
     /* ─── CONTENUTI 2026 SLIDE ─── */
     #scontenuti { background: var(--white); }
@@ -683,7 +702,7 @@
           <div class="tg-row"><dt data-en="Approach">Approccio</dt><dd data-en="Seasonal campaigns, dedicated budget">Campagne stagionali, budget dedicato</dd></div>
           <span class="tg-key" data-en="Pure racing machine">Macchina da regata pura</span>
         </div>
-        <div class="tg-card" style="border-top: 3px solid var(--brass);">
+        <div class="tg-card highlight">
           <div class="tg-n">02</div>
           <h3>Double Handed Specialist</h3>
           <div class="tg-sub" data-en="Maximum efficiency · Just the two of them">Efficienza massima · Solo in due</div>
@@ -698,8 +717,9 @@
           <div class="tg-sub" data-en="Dual soul · High competition">Doppia anima · Alta concorrenza</div>
           <div class="tg-row"><dt data-en="Goal">Obiettivo</dt><dd data-en="High-performance fun">Divertimento ad alte prestazioni</dd></div>
           <div class="tg-row"><dt>Driver</dt><dd data-en="Emotion, speed, sharing">Emozione, velocità, condivisione</dd></div>
-          <div class="tg-row"><dt data-en="Note">Nota</dt><dd data-en="Many boats targeting this buyer — high competition">Molte barche puntano a questo buyer — mercato competitivo</dd></div>
+          <div class="tg-row"><dt data-en="Competition">Concorrenza</dt><dd data-en="Many boats target this buyer — most competitive segment">Segmento più competitivo — molte barche puntano qui</dd></div>
           <span class="tg-key" data-en="Experience above all">Esperienza prima di tutto</span>
+          <div class="tg-note" data-en="Our differentiator: custom build + artisan story vs. series production">Il nostro differenziatore: custom + storia artigianale vs. produzione in serie</div>
         </div>
       </div>
     </div>
@@ -708,7 +728,7 @@
     <div class="slide tslide secondary" id="s5">
       <span class="s-label" data-en="The Target · 2 / 2">Il Target · 2 / 2</span>
       <h2 class="s-title" data-en="Who's at the <strong>helm.</strong>">Chi è al <strong>timone.</strong></h2>
-      <p style="font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;margin-top:-8px;" data-en="Secondary profiles · Still under evaluation">Profili secondari · Ancora in valutazione</p>
+      <p style="font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--brass);margin-bottom:10px;margin-top:-4px;padding:8px 16px;background:rgba(160,120,48,.08);border-left:3px solid var(--brass);display:inline-block;" data-en="Phase 2 targets · We will reach them — in the next phase of communication">Target Fase 2 · Li raggiungeremo — nella fase successiva della comunicazione</p>
       <div class="tg-grid">
         <div class="tg-card">
           <div class="tg-n">04</div>
